@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard – Vocabulary Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#f0ede8;color:#1a1a1a;font-size:16px;line-height:1.6}
+.top-bar{background:#0a4a38;padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Lora',serif;font-size:18px;font-weight:700;color:#f5e6b0}
+.top-links{display:flex;gap:12px}
+.top-link{font-size:14px;color:rgba(255,255,255,.7);text-decoration:none;border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:5px 12px}
+.top-link:hover{color:white;border-color:white}
+.main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
+
+/* LOGIN */
+.login-box{background:white;border-radius:16px;padding:40px;max-width:440px;margin:4rem auto;text-align:center;box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.login-box h1{font-family:'Lora',serif;font-size:26px;color:#0a4a38;margin-bottom:8px}
+.login-box p{color:#666;margin-bottom:28px;font-size:16px}
+.login-box input{width:100%;border:2px solid #e0e0e0;border-radius:10px;padding:14px 16px;font-size:17px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:14px}
+.login-box input:focus{border-color:#1d9e75}
+.login-box button{width:100%;background:#0a4a38;color:white;border:none;border-radius:10px;padding:14px;font-size:17px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.login-box button:hover{background:#1a7a5e}
+.login-err{color:#c62828;font-size:15px;margin-top:10px;display:none}
+
+/* DASHBOARD */
+.dash{display:none}
+.page-title{font-family:'Lora',serif;font-size:28px;font-weight:700;color:#0a4a38;margin-bottom:6px}
+.page-sub{font-size:16px;color:#666;margin-bottom:26px}
+
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:32px}
+.sum-card{background:white;border-radius:14px;padding:20px;text-align:center;border:1.5px solid rgba(0,0,0,.08)}
+.sum-num{font-family:'Lora',serif;font-size:36px;font-weight:700;color:#0a4a38}
+.sum-label{font-size:15px;color:#888;margin-top:4px}
+
+.section-title{font-family:'Lora',serif;font-size:20px;font-weight:600;color:#0a4a38;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+.export-btn{background:#0a4a38;color:white;border:none;border-radius:8px;padding:9px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.export-btn:hover{background:#1a7a5e}
+
+table{width:100%;border-collapse:collapse;background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:28px}
+thead{background:#0a4a38;color:white}
+th{padding:14px 16px;font-size:14px;font-weight:600;text-align:left}
+td{padding:14px 16px;font-size:15px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafaf8}
+.score-pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:13px;font-weight:600}
+.score-high{background:#e8f7ee;color:#1b5e20}
+.score-mid{background:#fff3cc;color:#7a5000}
+.score-low{background:#ffebee;color:#b71c1c}
+.unit-done{display:inline-block;width:24px;height:24px;border-radius:50%;background:#e8f7ee;color:#1b5e20;text-align:center;font-size:14px;line-height:24px;font-weight:700}
+.unit-no{display:inline-block;width:24px;height:24px;border-radius:50%;background:#f5f5f5;color:#bbb;text-align:center;font-size:14px;line-height:24px}
+
+.no-data{text-align:center;padding:40px;color:#888;font-size:17px;background:white;border-radius:14px}
+.refresh-btn{background:white;color:#0a4a38;border:2px solid #0a4a38;border-radius:8px;padding:9px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-left:10px}
+.refresh-btn:hover{background:#e8f7f2}
+
+.note-box{background:#e8f7f2;border:1.5px solid rgba(29,158,117,.3);border-radius:12px;padding:18px 22px;margin-bottom:24px;font-size:15px;color:#0a4a38;line-height:1.7}
+.note-box strong{font-weight:700}
+
+.tabs{display:flex;gap:10px;margin-bottom:20px}
+.tab{background:white;border:1.5px solid #e0e0e0;border-radius:8px;padding:10px 20px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;color:#555;transition:all .2s}
+.tab.active{background:#0a4a38;color:white;border-color:#0a4a38}
+.tab-content{display:none}
+.tab-content.active{display:block}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="logo">📊 Admin Dashboard – Vocabulary Course</div>
+  <div class="top-links">
+    <a href="index.html" class="top-link">← Back to Course</a>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- LOGIN -->
+  <div id="login-section">
+    <div class="login-box">
+      <h1>🔐 Admin Login</h1>
+      <p>Enter the admin password to view participant data and research results.</p>
+      <input type="password" id="pw" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')login()">
+      <button onclick="login()">Login to Dashboard</button>
+      <div class="login-err" id="pw-err">❌ Incorrect password. Try again.</div>
+      <div style="margin-top:16px;font-size:14px;color:#aaa">Default password: <strong>vocab2025</strong></div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dash" id="dashboard">
+    <div class="page-title">📊 Research Dashboard</div>
+    <div class="page-sub">Grade 4 Vocabulary Course — Participant Data &amp; Progress</div>
+
+    <div class="note-box">
+      <strong>📌 Researcher Note:</strong> This dashboard shows data collected from participants using this device or browser. For a full research study, set up a backend server (Google Sheets + Apps Script or Airtable) to collect data from all participants across devices. The Export CSV button downloads all data for analysis in Excel or SPSS.
+    </div>
+
+    <div class="summary-grid" id="summary-grid"></div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('participants')">👥 Participants</button>
+      <button class="tab" onclick="switchTab('progress')">📈 Unit Progress</button>
+      <button class="tab" onclick="switchTab('scores')">🏆 Scores</button>
+    </div>
+
+    <div class="tab-content active" id="tab-participants">
+      <div class="section-title">
+        Participant List
+        <div>
+          <button class="export-btn" onclick="exportCSV()">⬇ Export CSV</button>
+          <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+        </div>
+      </div>
+      <div id="participants-table"></div>
+    </div>
+
+    <div class="tab-content" id="tab-progress">
+      <div class="section-title">Unit Completion Progress</div>
+      <div id="progress-table"></div>
+    </div>
+
+    <div class="tab-content" id="tab-scores">
+      <div class="section-title">Quiz Scores</div>
+      <div id="scores-table"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const PASS='vocab2025';
+
+function login(){
+  const pw=document.getElementById('pw').value;
+  if(pw===PASS){
+    document.getElementById('login-section').style.display='none';
+    document.getElementById('dashboard').style.display='block';
+    loadData();
+  }else{
+    document.getElementById('pw-err').style.display='block';
+    document.getElementById('pw').value='';
+  }
+}
+
+function getLog(){
+  try{return JSON.parse(localStorage.getItem('vc5_admin')||'[]')}catch{return[]}
+}
+
+function switchTab(t){
+  document.querySelectorAll('.tab').forEach((b,i)=>{b.classList.remove('active')});
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-'+t).classList.add('active');
+}
+
+function loadData(){
+  const log=getLog();
+  renderSummary(log);
+  renderParticipants(log);
+  renderProgress(log);
+  renderScores(log);
+}
+
+function renderSummary(log){
+  const total=log.length;
+  const done1=log.filter(p=>p.units&&p.units.unit1).length;
+  const done4=log.filter(p=>p.units&&p.units.unit4).length;
+  const allScores=log.flatMap(p=>Object.values(p.units||{}).map(u=>u.score||0)).filter(s=>s>0);
+  const avg=allScores.length?Math.round(allScores.reduce((a,b)=>a+b,0)/allScores.length):0;
+  document.getElementById('summary-grid').innerHTML=`
+    <div class="sum-card"><div class="sum-num">${total}</div><div class="sum-label">Total Participants</div></div>
+    <div class="sum-card"><div class="sum-num">${done1}</div><div class="sum-label">Started Unit 1</div></div>
+    <div class="sum-card"><div class="sum-num">${done4}</div><div class="sum-label">Completed All Units</div></div>
+    <div class="sum-card"><div class="sum-num">${avg}%</div><div class="sum-label">Average Quiz Score</div></div>
+  `;
+}
+
+function renderParticipants(log){
+  if(!log.length){document.getElementById('participants-table').innerHTML='<div class="no-data">No participants yet. Share the course link to collect data.</div>';return;}
+  let html=`<table><thead><tr><th>#</th><th>Name</th><th>Age</th><th>Gender</th><th>School</th><th>Location</th><th>Tech Use</th><th>Start Date</th></tr></thead><tbody>`;
+  log.forEach((p,i)=>{
+    html+=`<tr><td>${i+1}</td><td><strong>${p.name||'—'}</strong></td><td>${p.age||'—'}</td><td>${p.gender||'—'}</td><td>${p.school||'—'}</td><td>${p.location||'—'}</td><td>${p.techUse||'—'}</td><td>${p.startTime?new Date(p.startTime).toLocaleDateString():'—'}</td></tr>`;
+  });
+  html+=`</tbody></table>`;
+  document.getElementById('participants-table').innerHTML=html;
+}
+
+function renderProgress(log){
+  if(!log.length){document.getElementById('progress-table').innerHTML='<div class="no-data">No data yet.</div>';return;}
+  let html=`<table><thead><tr><th>Name</th><th>Unit 1</th><th>Unit 2</th><th>Unit 3</th><th>Unit 4</th><th>Time Spent</th><th>Completed</th></tr></thead><tbody>`;
+  log.forEach(p=>{
+    const u=p.units||{};
+    const done=[1,2,3,4].filter(n=>u['unit'+n]).length;
+    const totalTime=Object.values(u).reduce((a,b)=>a+(b.time||0),0);
+    html+=`<tr>
+      <td><strong>${p.name||'—'}</strong></td>
+      <td>${u.unit1?'<span class="unit-done">✓</span>':'<span class="unit-no">—</span>'}</td>
+      <td>${u.unit2?'<span class="unit-done">✓</span>':'<span class="unit-no">—</span>'}</td>
+      <td>${u.unit3?'<span class="unit-done">✓</span>':'<span class="unit-no">—</span>'}</td>
+      <td>${u.unit4?'<span class="unit-done">✓</span>':'<span class="unit-no">—</span>'}</td>
+      <td>${totalTime}m</td>
+      <td>${done}/4 units</td>
+    </tr>`;
+  });
+  html+=`</tbody></table>`;
+  document.getElementById('progress-table').innerHTML=html;
+}
+
+function renderScores(log){
+  if(!log.length){document.getElementById('scores-table').innerHTML='<div class="no-data">No scores yet.</div>';return;}
+  let html=`<table><thead><tr><th>Name</th><th>Unit 1 Score</th><th>Unit 2 Score</th><th>Unit 3 Score</th><th>Unit 4 Score</th><th>Average</th></tr></thead><tbody>`;
+  log.forEach(p=>{
+    const u=p.units||{};
+    const scores=[1,2,3,4].map(n=>u['unit'+n]?u['unit'+n].score:null);
+    const valid=scores.filter(s=>s!==null);
+    const avg=valid.length?Math.round(valid.reduce((a,b)=>a+b,0)/valid.length):null;
+    function pill(s){if(s===null)return '<span style="color:#ccc">—</span>';
+      const cls=s>=80?'score-high':s>=60?'score-mid':'score-low';
+      return `<span class="score-pill ${cls}">${s}%</span>`;}
+    html+=`<tr><td><strong>${p.name||'—'}</strong></td>${scores.map(pill).join('')}<td>${avg!==null?`<span class="score-pill ${avg>=80?'score-high':avg>=60?'score-mid':'score-low'}">${avg}%</span>`:'—'}</td></tr>`;
+  });
+  html+=`</tbody></table>`;
+  document.getElementById('scores-table').innerHTML=html;
+}
+
+function exportCSV(){
+  const log=getLog();
+  if(!log.length){alert('No data to export yet.');return;}
+  let csv='ID,Name,Age,Gender,School,Location,Tech Use,Start Date,U1 Score,U2 Score,U3 Score,U4 Score,Average Score,Units Completed\n';
+  log.forEach(p=>{
+    const u=p.units||{};
+    const scores=[1,2,3,4].map(n=>u['unit'+n]?u['unit'+n].score:'');
+    const valid=scores.filter(s=>s!=='');
+    const avg=valid.length?Math.round(valid.reduce((a,b)=>a+parseInt(b),0)/valid.length):'';
+    const done=[1,2,3,4].filter(n=>u['unit'+n]).length;
+    csv+=`"${p.id||''}","${p.name||''}","${p.age||''}","${p.gender||''}","${p.school||''}","${p.location||''}","${p.techUse||''}","${p.startTime?new Date(p.startTime).toLocaleDateString():''}",${scores.join(',')},${avg},${done}/4\n`;
+  });
+  const blob=new Blob([csv],{type:'text/csv'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='vocab_course_data_'+new Date().toISOString().split('T')[0]+'.csv';
+  a.click();
+}
+
+document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')login()});
+</script>
+</body>
+</html>
