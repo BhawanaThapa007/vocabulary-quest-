@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Certificate</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:#1a1a1a;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.top-actions{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}
+.btn{padding:10px 22px;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;border:none;transition:all .2s}
+.btn-gold{background:#d4a017;color:#3c2a00}
+.btn-green{background:#2db88a;color:white}
+.btn-gray{background:#555;color:white}
+.btn:hover{transform:translateY(-2px)}
+
+/* CERTIFICATE */
+.cert-wrap{width:100%;max-width:800px;background:white;border-radius:4px;overflow:hidden;box-shadow:0 20px 80px rgba(0,0,0,.5);position:relative}
+.cert-border{border:16px solid #0a4a38;margin:12px;position:relative;padding:36px 40px;text-align:center}
+.cert-border::before{content:'';position:absolute;inset:8px;border:2px solid #d4a017;pointer-events:none}
+.cert-corner{position:absolute;font-size:28px}
+.cert-corner.tl{top:14px;left:14px}
+.cert-corner.tr{top:14px;right:14px}
+.cert-corner.bl{bottom:14px;left:14px}
+.cert-corner.br{bottom:14px;right:14px}
+.cert-school{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:12px}
+.cert-presents{font-size:14px;color:#888;margin-bottom:4px}
+.cert-title{font-family:'Lora',serif;font-size:38px;font-weight:700;color:#0a4a38;margin-bottom:18px;line-height:1.2}
+.cert-line{width:80px;height:3px;background:#d4a017;margin:0 auto 16px}
+.cert-this{font-size:15px;color:#555;margin-bottom:6px}
+.cert-name{font-family:'Lora',serif;font-size:44px;font-weight:700;color:#0a4a38;margin-bottom:4px;border-bottom:2px solid #0a4a38;display:inline-block;padding-bottom:4px;min-width:300px}
+.cert-sub{font-size:14px;color:#888;margin-bottom:20px}
+.cert-completed{font-size:15px;color:#555;margin-bottom:20px;line-height:1.8}
+.cert-units{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.cert-unit{background:#e8f7f2;border:1.5px solid rgba(45,184,138,.3);border-radius:10px;padding:10px 14px;text-align:center;min-width:110px}
+.cu-icon{font-size:22px;margin-bottom:3px}
+.cu-name{font-size:11px;color:#0a4a38;font-weight:700}
+.cu-score{font-size:15px;font-weight:800;color:#276749;margin-top:3px}
+.cert-scores-row{display:flex;justify-content:center;gap:20px;margin-bottom:22px;flex-wrap:wrap}
+.cs{text-align:center}
+.cs-num{font-size:26px;font-weight:800;color:#0a4a38}
+.cs-lbl{font-size:12px;color:#888}
+.cert-sigs{display:flex;justify-content:space-around;align-items:flex-end;margin-top:20px;padding-top:20px;border-top:1px solid #e0e0e0;flex-wrap:wrap;gap:20px}
+.sig{text-align:center;min-width:160px}
+.sig-line{width:160px;height:1px;background:#1a1a1a;margin:0 auto 6px}
+.sig-name{font-size:13px;font-weight:700;color:#1a1a1a}
+.sig-title{font-size:11px;color:#888}
+.cert-date{font-size:13px;color:#888;margin-top:16px}
+.cert-stars{font-size:24px;letter-spacing:4px;margin-bottom:14px}
+.cert-id{font-size:10px;color:#ccc;margin-top:10px}
+@media print{
+  body{background:white;padding:0}
+  .top-actions{display:none}
+  .cert-wrap{box-shadow:none;max-width:100%}
+}
+</style>
+</head>
+<body>
+<div class="top-actions">
+  <button class="btn btn-gold" onclick="window.print()">🖨️ Print Certificate</button>
+  <button class="btn btn-green" onclick="window.location='index.html'">🏠 Back to Home</button>
+</div>
+
+<div class="cert-wrap" id="cert">
+  <div class="cert-border">
+    <span class="cert-corner tl">✦</span>
+    <span class="cert-corner tr">✦</span>
+    <span class="cert-corner bl">✦</span>
+    <span class="cert-corner br">✦</span>
+
+    <div class="cert-school" id="cert-school">Vocabulary Learning Adventure</div>
+    <div class="cert-presents">proudly presents</div>
+
+    <div class="cert-title">Certificate of Achievement</div>
+    <div class="cert-line"></div>
+
+    <div class="cert-this">This certificate is proudly awarded to</div>
+    <div class="cert-name" id="cert-name">Student Name</div>
+    <div class="cert-sub" id="cert-school2"></div>
+
+    <div class="cert-stars">⭐ ⭐ ⭐ ⭐ ⭐</div>
+
+    <div class="cert-completed">
+      for successfully completing all four units of the<br>
+      <strong>Grade 4 Vocabulary Learning Adventure</strong><br>
+      and demonstrating excellent vocabulary skills across<br>
+      Academic Excellence, Family &amp; Relations, Science &amp; Nature, and Community &amp; Culture
+    </div>
+
+    <div class="cert-units" id="cert-units"></div>
+
+    <div class="cert-scores-row" id="cert-scores"></div>
+
+    <div class="cert-sigs">
+      <div class="sig">
+        <div class="sig-line"></div>
+        <div class="sig-name" id="cert-student-sig">Student</div>
+        <div class="sig-title">Participant</div>
+      </div>
+      <div class="sig">
+        <div style="font-size:36px;margin-bottom:4px">📚</div>
+      </div>
+      <div class="sig">
+        <div class="sig-line"></div>
+        <div class="sig-name">Vocabulary Learning Adventure</div>
+        <div class="sig-title">Online Course</div>
+      </div>
+    </div>
+
+    <div class="cert-date" id="cert-date"></div>
+    <div class="cert-id" id="cert-id"></div>
+  </div>
+</div>
+
+<script>
+function getPart(){const pid=localStorage.getItem('vc_current');if(!pid)return null;try{return JSON.parse(localStorage.getItem('vcp_'+pid)||'null');}catch{return null;}}
+const p=getPart();
+if(!p){document.getElementById('cert-name').textContent='Unknown Student';}
+else{
+  document.getElementById('cert-name').textContent=p.name||'Student';
+  document.getElementById('cert-student-sig').textContent=p.name||'Student';
+  const schoolGrade=[p.school,p.grade].filter(Boolean).join(' • ');
+  document.getElementById('cert-school2').textContent=schoolGrade;
+  document.getElementById('cert-date').textContent='Completed on: '+new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('cert-id').textContent='Certificate ID: '+(p.pid||'—')+' | Total Points: '+((p.totalPoints||0)+' ⭐');
+
+  const UNITS=[['🏛️','Academic Excellence','unit1'],['👨‍👩‍👧','Family & Relations','unit2'],['🌿','Science & Nature','unit3'],['🏘️','Community & Culture','unit4']];
+  const sc=p.scores||{};
+  const unitsHtml=UNITS.map(([icon,name,key],i)=>{
+    const score=sc['overall'+(i+1)];
+    const done=(p.unitsCompleted||[]).includes(i+1);
+    return `<div class="cert-unit">
+      <div class="cu-icon">${icon}</div>
+      <div class="cu-name">${name}</div>
+      <div class="cu-score">${done?(score!=null?score+'%':'✓'):'—'}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('cert-units').innerHTML=unitsHtml;
+
+  const overalls=[sc.overall1,sc.overall2,sc.overall3,sc.overall4].filter(v=>v!=null);
+  const grandAvg=overalls.length?Math.round(overalls.reduce((a,b)=>a+b,0)/overalls.length):0;
+  const totalTime=Math.round((p.totalTime||0)/60);
+  document.getElementById('cert-scores').innerHTML=`
+    <div class="cs"><div class="cs-num">${(p.unitsCompleted||[]).length}/4</div><div class="cs-lbl">Units Completed</div></div>
+    <div class="cs"><div class="cs-num">${grandAvg}%</div><div class="cs-lbl">Average Score</div></div>
+    <div class="cs"><div class="cs-num">${p.totalPoints||0}</div><div class="cs-lbl">Total Points ⭐</div></div>
+    <div class="cs"><div class="cs-num">${totalTime}m</div><div class="cs-lbl">Time Spent</div></div>
+  `;
+}
+</script>
+</body>
+</html>

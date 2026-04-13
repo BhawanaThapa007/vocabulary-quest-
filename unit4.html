@@ -7,170 +7,182 @@
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Nunito',sans-serif;background:#f0f7f4;color:#1a1a1a;font-size:17px;line-height:1.6}
-.top-bar{position:sticky;top:0;z-index:100;background:#0a4a38;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.top-logo{font-family:'Lora',serif;font-size:15px;font-weight:700;color:#f5e6b0;flex:1}
-.top-mid{display:flex;align-items:center;gap:14px;font-size:14px;color:rgba(255,255,255,.8)}
-.timer-pill{background:rgba(255,255,255,.15);border-radius:7px;padding:4px 12px;font-size:14px;font-weight:700;color:white}
-.prog-bar-wrap{height:6px;background:rgba(255,255,255,.2);width:120px;border-radius:99px;overflow:hidden}
-.prog-bar-inner{height:100%;background:linear-gradient(90deg,#2db88a,#d4a017);transition:width .5s ease}
-.global-prog{position:sticky;top:52px;z-index:99;height:5px;background:rgba(0,0,0,.1)}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:#f0f7f4;color:#1a1a1a;font-size:17px;line-height:1.65}
+@keyframes xpPop{0%{transform:translateY(0) scale(1);opacity:1}60%{transform:translateY(-40px) scale(1.2);opacity:1}100%{transform:translateY(-80px) scale(.8);opacity:0}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.top-bar{position:sticky;top:0;z-index:100;background:#0a4a38;padding:9px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 2px 12px rgba(0,0,0,.25);flex-wrap:wrap}
+.tl{font-family:'Lora',serif;font-size:15px;font-weight:700;color:#f5e6b0;flex:1}
+.tm{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.timer-pill{background:rgba(255,255,255,.18);border-radius:7px;padding:4px 12px;font-size:14px;font-weight:700;color:white;min-width:65px;text-align:center}
+.xp-bar-wrap{background:rgba(255,255,255,.12);border-radius:7px;padding:4px 12px;font-size:13px;font-weight:700;color:#f5e6b0;white-space:nowrap}
+.global-prog{height:5px;background:rgba(255,255,255,.15)}
 .global-prog-fill{height:100%;background:linear-gradient(90deg,#2db88a,#d4a017);transition:width .6s ease}
-.page-wrap{max-width:760px;margin:0 auto;padding:1.5rem 1rem 3rem}
-.ph{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-.back-btn{background:white;border:1.5px solid rgba(0,0,0,.12);border-radius:9px;padding:9px 16px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;color:#444;transition:all .2s}
+.page-wrap{max-width:820px;margin:0 auto;padding:1.4rem 1rem 4rem}
+.ph{display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.back-btn{background:white;border:2px solid rgba(0,0,0,.12);border-radius:9px;padding:9px 16px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;color:#555;transition:all .2s;white-space:nowrap}
 .back-btn:hover{background:#e8f7f2;color:#0a4a38;border-color:#2db88a}
 .unit-title{font-family:'Lora',serif;font-size:22px;font-weight:700;color:#0a4a38}
 .unit-sub{font-size:14px;color:#888;margin-top:2px}
-.book-shell{background:white;border-radius:5px 16px 16px 5px;box-shadow:-6px 6px 0 #b8b0a0,0 8px 32px rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.07);overflow:hidden;position:relative}
-.book-spine-line{position:absolute;left:0;top:0;bottom:0;width:12px;background:linear-gradient(180deg,#0a4a38,#1a7a5e,#0a4a38);z-index:2}
-.book-head{background:#0a4a38;color:white;padding:16px 22px 16px 28px;display:flex;justify-content:space-between;align-items:center}
-.bh-step{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:3px}
-.bh-title{font-family:'Lora',serif;font-size:18px;font-weight:700}
-.step-dots{display:flex;gap:6px;align-items:center}
-.sd{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.25);transition:all .25s}
-.sd.active{background:#d4a017;transform:scale(1.2)}
-.sd.done{background:#2db88a}
-.book-body{padding:22px 24px 22px 30px;min-height:420px}
-.book-foot{padding:14px 24px 14px 30px;border-top:1.5px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center;background:#fafaf8}
+.resume-tag{display:inline-block;background:#d4a017;color:white;font-size:13px;font-weight:700;border-radius:99px;padding:3px 12px;margin-left:8px;vertical-align:middle}
+.book{background:white;border-radius:5px 16px 16px 5px;box-shadow:-6px 7px 0 #a8a090,0 10px 36px rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.07);overflow:hidden;position:relative}
+.spine{position:absolute;left:0;top:0;bottom:0;width:12px;background:linear-gradient(180deg,#0a4a38,#1d8a6a,#0a4a38);z-index:2}
+.book-head{background:#0a4a38;color:white;padding:15px 22px 15px 28px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.bh-left .bh-step{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:3px}
+.bh-left .bh-title{font-family:'Lora',serif;font-size:18px;font-weight:700}
+.dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;max-width:130px}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .25s;flex-shrink:0}
+.dot.active{background:#d4a017;transform:scale(1.35)}
+.dot.done{background:#2db88a}
+.book-body{padding:22px 24px 22px 30px}
+.book-foot{padding:13px 24px 13px 30px;border-top:2px solid #f0efe8;display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fafaf6;flex-wrap:wrap}
 .step{display:none}
-.step.active{display:block;animation:fadeIn .35s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.btn-g{background:#0a4a38;color:white;border:none;border-radius:10px;padding:12px 24px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s}
+.step.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.btn-g{background:#0a4a38;color:white;border:none;border-radius:10px;padding:12px 24px;font-size:17px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s}
 .btn-g:hover{background:#1a7a5e;transform:translateY(-1px)}
-.btn-g:disabled{opacity:.38;cursor:default;transform:none}
-.btn-o{background:transparent;color:#0a4a38;border:2px solid #0a4a38;border-radius:10px;padding:10px 20px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s}
+.btn-g:disabled{opacity:.32;cursor:default;transform:none}
+.btn-o{background:transparent;color:#0a4a38;border:2px solid #0a4a38;border-radius:10px;padding:10px 20px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s}
 .btn-o:hover{background:#e8f7f2}
-.atitle{font-family:'Lora',serif;font-size:19px;font-weight:700;color:#0a4a38;margin-bottom:4px}
-.ainstr{font-size:15px;color:#666;margin-bottom:18px}
-/* WORD CARDS */
-.wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:16px}
-.wcard{background:#e8f7f2;border:1.5px solid rgba(45,184,138,.25);border-radius:12px;padding:16px;position:relative;transition:transform .2s,box-shadow .2s}
-.wcard:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.1)}
-.speak-btn{position:absolute;top:12px;right:12px;background:#0a4a38;border:none;border-radius:7px;padding:6px 10px;font-size:13px;cursor:pointer;color:white;font-family:'Nunito',sans-serif;font-weight:700;display:flex;align-items:center;gap:4px;transition:background .2s}
+.atitle{font-family:'Lora',serif;font-size:20px;font-weight:700;color:#0a4a38;margin-bottom:4px}
+.ainstr{font-size:15px;color:#555;margin-bottom:18px;background:#f5f9f7;border-radius:8px;padding:10px 14px;border-left:4px solid #2db88a;line-height:1.6}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:16px}
+.wcard{background:linear-gradient(135deg,#e8f7f2,#f0fff8);border:2px solid rgba(45,184,138,.2);border-radius:13px;padding:16px;transition:transform .2s,box-shadow .2s}
+.wcard:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.09)}
+.speak-btn{background:#0a4a38;color:white;border:none;border-radius:7px;padding:6px 12px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:4px;margin-bottom:10px;transition:all .2s}
 .speak-btn:hover{background:#1a7a5e}
 .speak-btn.playing{background:#d4a017}
-.wword{font-family:'Lora',serif;font-size:20px;font-weight:700;color:#0a4a38;margin-bottom:2px;padding-right:80px}
-.wpron{font-size:14px;color:#1a7a5e;font-style:italic;margin-bottom:2px}
-.wpos{font-size:12px;color:#888;background:white;border-radius:5px;padding:1px 8px;display:inline-block;margin-bottom:8px}
-.wdef{font-size:15px;color:#333;line-height:1.55}
-.wex{font-size:14px;color:#1a1a1a;background:white;border-radius:8px;padding:8px 12px;margin-top:10px;border-left:4px solid #2db88a;font-style:italic;line-height:1.5}
-/* STORY */
-.story-box{background:linear-gradient(135deg,#e8f7f2,#f0f9ff);border:1.5px solid rgba(45,184,138,.3);border-radius:14px;padding:22px;font-size:17px;line-height:1.9;color:#1a1a1a;margin-bottom:10px}
-.story-box b{color:#0a4a38;font-weight:800}
-.story-label{font-size:13px;color:#888;margin-bottom:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
-/* PRONUNCIATION */
-.pron-rows{display:flex;flex-direction:column;gap:10px}
-.prow{background:#e8f7f2;border-radius:11px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.pw-word{font-family:'Lora',serif;font-size:19px;font-weight:700;color:#0a4a38}
+.wword{font-family:'Lora',serif;font-size:21px;font-weight:700;color:#0a4a38;margin-bottom:2px}
+.wpron{font-size:14px;color:#1a7a5e;font-style:italic;margin-bottom:3px}
+.wpos{font-size:12px;color:#888;background:white;border-radius:5px;padding:2px 8px;display:inline-block;margin-bottom:8px;border:1px solid rgba(0,0,0,.08)}
+.wdef{font-size:15px;color:#333;line-height:1.58;margin-bottom:7px}
+.wex{font-size:14px;color:#1a1a1a;background:white;border-radius:7px;padding:8px 12px;border-left:4px solid #2db88a;font-style:italic;line-height:1.5}
+.story-box{background:linear-gradient(135deg,#eaf7f2,#f0f9ff);border:2px solid rgba(45,184,138,.25);border-radius:13px;padding:22px;font-size:18px;line-height:2.1;color:#1a1a1a}
+.story-box b{color:#0a4a38;font-weight:800;background:rgba(45,184,138,.12);border-radius:4px;padding:0 3px}
+.story-label{font-size:13px;color:#888;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.prow{background:#e8f7f2;border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid rgba(45,184,138,.2);margin-bottom:10px}
+.pw-word{font-family:'Lora',serif;font-size:20px;font-weight:700;color:#0a4a38;margin-bottom:2px}
 .pw-info{font-size:14px;color:#1a7a5e}
 .prow-btn{background:#0a4a38;color:white;border:none;border-radius:8px;padding:9px 18px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;white-space:nowrap}
 .prow-btn:hover{background:#1a7a5e}
 .prow-btn.playing{background:#d4a017}
-.speech-note{font-size:13px;color:#888;text-align:center;margin-top:10px;background:#fff8e8;border-radius:8px;padding:8px;border:1px solid #f5e6b0}
-/* FILL IN BLANKS */
-.fib-list{display:flex;flex-direction:column;gap:14px}
-.fib-card{background:white;border:2px solid #e0e0e0;border-radius:12px;padding:18px;transition:border-color .2s}
-.fib-card.ok{border-color:#2db88a;background:#f0fff4}
-.fib-card.no{border-color:#fc8181}
-.fib-sentence{font-size:17px;line-height:2.2;color:#1a1a1a}
-.fib-input{border:none;border-bottom:2.5px solid #1a7a5e;background:transparent;font-size:17px;font-family:'Nunito',sans-serif;font-weight:700;padding:2px 8px;width:130px;color:#0a4a38;outline:none;transition:border-color .2s}
-.fib-input:focus{border-bottom-color:#d4a017}
-.fib-input[readonly]{border-bottom-color:#2db88a;color:#1a7a5e}
-.fib-actions{display:flex;align-items:center;gap:10px;margin-top:12px}
-.fib-check-btn{background:#0a4a38;color:white;border:none;border-radius:8px;padding:8px 18px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif}
-.fib-check-btn:hover{background:#1a7a5e}
-.fib-fb{font-size:15px;font-weight:700;min-height:22px}
+.speech-note{font-size:14px;text-align:center;margin-top:12px;background:#fff8e1;border-radius:9px;padding:10px;border:1px solid #f5e6b0;color:#5c3d1e}
+.fib-card{background:white;border:2px solid #e0e0e0;border-radius:12px;padding:18px;margin-bottom:12px;transition:border-color .2s}
+.fib-card.ok{border-color:#2db88a;background:#f0fff8}
+.fib-sentence{font-size:18px;line-height:2.4;color:#1a1a1a}
+.fib-inp{border:none;border-bottom:3px solid #1a7a5e;background:transparent;font-size:18px;font-family:'Nunito',sans-serif;font-weight:700;padding:2px 8px;width:138px;color:#0a4a38;outline:none;transition:border-color .2s}
+.fib-inp:focus{border-bottom-color:#d4a017}
+.fib-inp[readonly]{border-bottom-color:#2db88a;color:#276749}
+.fib-actions{display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap}
+.fib-check{background:#0a4a38;color:white;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif}
+.fib-check:hover{background:#1a7a5e}
+.fib-fb{font-size:16px;font-weight:700}
 .fib-fb.ok{color:#276749}
 .fib-fb.no{color:#c53030}
-/* SCRAMBLE */
-.scr-list{display:flex;flex-direction:column;gap:14px}
-.scr-card{background:white;border:2px solid #e0e0e0;border-radius:12px;padding:18px;transition:border-color .2s}
-.scr-card.ok{border-color:#2db88a;background:#f0fff4}
-.scr-jumbled{font-size:26px;font-family:'Lora',serif;font-weight:700;color:#0a4a38;letter-spacing:8px;text-align:center;background:#e8f7f2;border-radius:10px;padding:14px;margin-bottom:10px}
-.scr-hint{font-size:14px;color:#888;text-align:center;margin-bottom:12px}
-.scr-row{display:flex;gap:10px}
-.scr-inp{flex:1;border:2px solid #ccc;border-radius:9px;padding:12px 15px;font-size:17px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;transition:border-color .2s}
+.fib-score-bar{height:8px;background:#e0e0e0;border-radius:99px;overflow:hidden;margin-top:14px}
+.fib-score-fill{height:100%;background:#2db88a;border-radius:99px;transition:width .4s}
+.tf-card{background:white;border:2px solid #e0e0e0;border-radius:12px;padding:18px;margin-bottom:12px;transition:border-color .2s}
+.tf-card.ok{border-color:#2db88a;background:#f0fff8}
+.tf-card.no{border-color:#fc8181;background:#fff5f5}
+.tf-stmt{font-size:18px;font-weight:600;color:#1a1a1a;margin-bottom:14px;line-height:1.55}
+.tf-btns{display:flex;gap:10px}
+.tf-btn{flex:1;border:2px solid #e0e0e0;border-radius:10px;padding:13px;font-size:17px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;background:white;transition:all .2s}
+.tf-btn:hover:not([disabled]){transform:translateY(-2px)}
+.t-btn:hover:not([disabled]){background:#e8f7f2;border-color:#2db88a;color:#276749}
+.f-btn:hover:not([disabled]){background:#fff5f5;border-color:#fc8181;color:#c53030}
+.tf-btn.correct{background:#2db88a;border-color:#2db88a;color:white}
+.tf-btn.wrong{background:#fc8181;border-color:#fc8181;color:white}
+.tf-btn[disabled]{cursor:default}
+.tf-fb{font-size:15px;font-weight:700;margin-top:10px}
+.tf-fb.ok{color:#276749}
+.tf-fb.no{color:#c53030}
+.scr-card{background:white;border:2px solid #e0e0e0;border-radius:12px;padding:18px;margin-bottom:12px;transition:border-color .2s}
+.scr-card.ok{border-color:#2db88a;background:#f0fff8}
+.scr-jumbled{font-size:26px;font-family:'Lora',serif;font-weight:700;color:#0a4a38;letter-spacing:9px;text-align:center;background:#e8f7f2;border-radius:10px;padding:15px;margin-bottom:9px}
+.scr-hint{font-size:15px;color:#888;text-align:center;margin-bottom:12px}
+.scr-row{display:flex;gap:9px}
+.scr-inp{flex:1;border:2px solid #ccc;border-radius:9px;padding:12px 15px;font-size:18px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;transition:border-color .2s}
 .scr-inp:focus{border-color:#1a7a5e}
-.scr-inp[readonly]{border-color:#2db88a;color:#1a7a5e;background:#f0fff4}
-.scr-btn{background:#0a4a38;color:white;border:none;border-radius:9px;padding:12px 18px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap}
+.scr-inp[readonly]{border-color:#2db88a;color:#276749;background:#f0fff8}
+.scr-btn{background:#0a4a38;color:white;border:none;border-radius:9px;padding:12px 18px;font-size:17px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap}
 .scr-btn:hover{background:#1a7a5e}
-.scr-fb{font-size:15px;font-weight:700;margin-top:8px;min-height:22px}
+.scr-fb{font-size:16px;font-weight:700;margin-top:9px}
 .scr-fb.ok{color:#276749}
 .scr-fb.no{color:#c53030}
-/* MULTIPLE CHOICE */
-.mc-list{display:flex;flex-direction:column;gap:16px;margin-bottom:14px}
-.mc-block{background:white;border:2px solid #e0e0e0;border-radius:13px;padding:18px}
-.mc-q{font-size:17px;font-weight:700;color:#1a1a1a;margin-bottom:14px;line-height:1.5}
+.match-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.match-col{display:flex;flex-direction:column;gap:8px}
+.match-word{background:#0a4a38;color:white;border-radius:9px;padding:12px 16px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;user-select:none;border:2px solid transparent}
+.match-word:hover:not(.matched){background:#1a7a5e}
+.match-word.selected{background:#d4a017;border-color:#b8860b;transform:scale(1.04)}
+.match-word.matched{background:#2db88a;cursor:default;opacity:.9}
+.match-def{background:#f0f0f0;border:2px solid #e0e0e0;border-radius:9px;padding:12px 14px;font-size:15px;cursor:pointer;transition:all .2s;line-height:1.4;user-select:none}
+.match-def:hover:not(.matched){background:#e8f7f2;border-color:#2db88a}
+.match-def.matched{background:#e8f7f2;border-color:#2db88a;color:#276749;font-weight:700;cursor:default}
+.match-score{font-size:16px;font-weight:700;color:#0a4a38;margin-top:10px;text-align:center}
+.mc-block{background:white;border:2px solid #e0e0e0;border-radius:12px;padding:18px;margin-bottom:12px}
+.mc-q{font-size:18px;font-weight:700;color:#1a1a1a;margin-bottom:13px;line-height:1.55}
+.mc-q .qn{color:#aaa;font-size:14px;font-weight:400;margin-right:4px}
 .mc-opts{display:flex;flex-direction:column;gap:9px}
-.mc-opt{background:#f7f7f7;border:2px solid #e0e0e0;border-radius:10px;padding:13px 16px;font-size:16px;font-weight:600;cursor:pointer;color:#1a1a1a;text-align:left;font-family:'Nunito',sans-serif;transition:all .18s;display:flex;align-items:center;gap:10px}
+.mc-opt{background:#f7f7f7;border:2px solid #e0e0e0;border-radius:10px;padding:13px 16px;font-size:17px;font-weight:600;cursor:pointer;color:#1a1a1a;text-align:left;font-family:'Nunito',sans-serif;transition:all .18s;display:flex;align-items:center;gap:10px}
 .mc-opt::before{content:'○';font-size:18px;color:#ccc;flex-shrink:0}
 .mc-opt:hover:not([disabled]){background:#e8f7f2;border-color:#2db88a;color:#0a4a38}
 .mc-opt:hover:not([disabled])::before{color:#2db88a}
-.mc-opt.ok{background:#f0fff4;border-color:#2db88a;color:#276749}
+.mc-opt.ok{background:#f0fff8;border-color:#2db88a;color:#276749}
 .mc-opt.ok::before{content:'✓';color:#2db88a}
 .mc-opt.no{background:#fff5f5;border-color:#fc8181;color:#c53030}
 .mc-opt.no::before{content:'✗';color:#fc8181}
 .mc-opt[disabled]{cursor:default}
-.mc-fb{font-size:15px;font-weight:700;margin-top:10px;padding:8px 12px;border-radius:8px}
-.mc-fb.ok{color:#276749;background:#f0fff4}
+.mc-fb{font-size:16px;font-weight:700;margin-top:10px;padding:9px 13px;border-radius:9px}
+.mc-fb.ok{color:#276749;background:#f0fff8}
 .mc-fb.no{color:#c53030;background:#fff5f5}
-/* OPEN RESPONSE */
 .open-box{background:white;border:2px solid #e0e0e0;border-radius:13px;padding:20px;margin-bottom:14px}
-.open-q{font-size:17px;font-weight:700;color:#1a1a1a;margin-bottom:14px;line-height:1.5}
-.open-ta{width:100%;border:2px solid #ccc;border-radius:10px;padding:14px;font-size:16px;font-family:'Nunito',sans-serif;min-height:100px;resize:vertical;outline:none;line-height:1.6}
+.open-q{font-size:18px;font-weight:700;color:#1a1a1a;margin-bottom:14px;background:#f5f9f7;border-radius:9px;padding:12px;border-left:4px solid #0a4a38;line-height:1.55}
+.open-ta{width:100%;border:2px solid #ccc;border-radius:10px;padding:15px;font-size:17px;font-family:'Nunito',sans-serif;min-height:120px;resize:vertical;outline:none;line-height:1.65}
 .open-ta:focus{border-color:#1a7a5e}
-.open-save{background:#0a4a38;color:white;border:none;border-radius:9px;padding:10px 20px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:10px}
+.open-save{background:#0a4a38;color:white;border:none;border-radius:9px;padding:12px 22px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:12px}
 .open-save:hover{background:#1a7a5e}
-.open-saved-msg{font-size:14px;color:#276749;font-weight:700;margin-top:8px;display:none}
-/* AI CHAT */
-.ai-box{background:linear-gradient(135deg,#e8f7f2,#f0f9ff);border:1.5px solid rgba(45,184,138,.3);border-radius:13px;padding:18px}
-.ai-head{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:800;color:#0a4a38;margin-bottom:12px}
-.ai-pulse{width:9px;height:9px;background:#2db88a;border-radius:50%;animation:pulse 1.5s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-.ai-msgs{display:flex;flex-direction:column;gap:9px;min-height:60px;max-height:200px;overflow-y:auto;margin-bottom:12px;padding:2px}
-.ai-msg{font-size:15px;line-height:1.55;padding:10px 14px;border-radius:10px;max-width:90%}
+.open-ok{font-size:15px;color:#276749;font-weight:700;margin-top:9px;display:none}
+.ai-box{background:linear-gradient(135deg,#e8f7f2,#eef9ff);border:2px solid rgba(45,184,138,.25);border-radius:13px;padding:18px;margin-top:16px}
+.ai-head{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:800;color:#0a4a38;margin-bottom:12px}
+.ai-dot{width:10px;height:10px;background:#2db88a;border-radius:50%;animation:pulse 1.5s infinite}
+.ai-offline{background:#fff8e1;border:1px solid #d4a017;border-radius:7px;padding:7px 12px;font-size:13px;color:#5c3d1e;margin-bottom:10px}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.ai-msgs{display:flex;flex-direction:column;gap:9px;min-height:60px;max-height:220px;overflow-y:auto;margin-bottom:12px;padding:2px}
+.ai-msg{font-size:16px;line-height:1.58;padding:10px 14px;border-radius:10px;max-width:93%}
 .ai-msg.bot{background:white;color:#1a1a1a;border:1px solid rgba(0,0,0,.08);align-self:flex-start}
 .ai-msg.usr{background:#0a4a38;color:white;align-self:flex-end}
 .ai-row{display:flex;gap:9px}
-.ai-in{flex:1;border:2px solid rgba(0,0,0,.12);border-radius:9px;padding:10px 14px;font-size:16px;font-family:'Nunito',sans-serif;outline:none;background:white}
+.ai-in{flex:1;border:2px solid rgba(0,0,0,.12);border-radius:9px;padding:11px 14px;font-size:17px;font-family:'Nunito',sans-serif;outline:none;background:white}
 .ai-in:focus{border-color:#1a7a5e}
-.ai-send{background:#0a4a38;color:white;border:none;border-radius:9px;padding:10px 18px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap}
-.ai-send:disabled{opacity:.5;cursor:default}
-.ai-send:hover:not(:disabled){background:#1a7a5e}
-/* MODAL */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:200;padding:1rem}
+.ai-send{background:#0a4a38;color:white;border:none;border-radius:9px;padding:11px 18px;font-size:17px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap}
+.ai-send:hover{background:#1a7a5e}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:200;padding:1rem}
 .modal-bg.show{display:flex}
-.modal-box{background:white;border-radius:20px;padding:32px;max-width:360px;width:100%;text-align:center;animation:popIn .35s cubic-bezier(.34,1.56,.64,1)}
-@keyframes popIn{from{transform:scale(.75);opacity:0}to{transform:scale(1);opacity:1}}
-.modal-icon{font-size:56px;margin-bottom:12px}
-.modal-h{font-family:'Lora',serif;font-size:24px;font-weight:700;color:#0a4a38;margin-bottom:8px}
-.modal-p{font-size:16px;color:#666;line-height:1.6;margin-bottom:16px}
-.modal-badge{background:#f5e6b0;border:2px solid #d4a017;border-radius:10px;padding:10px 18px;font-size:16px;color:#5c3d1e;font-weight:800;margin-bottom:20px;display:inline-block}
-.modal-btns{display:flex;flex-direction:column;gap:10px}
+.modal-box{background:white;border-radius:22px;padding:34px;max-width:500px;width:100%;text-align:center;animation:popIn .35s cubic-bezier(.34,1.56,.64,1);max-height:90vh;overflow-y:auto}
+@keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-badge-icon{font-size:64px;margin-bottom:10px}
+.modal-h{font-family:'Lora',serif;font-size:26px;font-weight:700;color:#0a4a38;margin-bottom:8px}
+.modal-p{font-size:17px;color:#666;margin-bottom:14px;line-height:1.6}
+.modal-badge-name{display:inline-block;background:#f5e6b0;border:2px solid #d4a017;border-radius:12px;padding:10px 22px;font-size:18px;font-weight:800;color:#5c3d1e;margin-bottom:14px}
+.modal-xp{font-size:16px;font-weight:700;color:#553c9a;margin-bottom:18px}
+.modal-btns{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.score-tbl{width:100%;border-collapse:collapse;margin-bottom:10px;text-align:left}
+.score-tbl th{background:#0a4a38;color:white;padding:10px 13px;font-size:15px}
+.score-tbl td{padding:10px 13px;border-bottom:1px solid #f0f0f0;font-size:16px}
+.g{color:#276749;font-weight:800}.o{color:#b7791f;font-weight:800}.r{color:#c53030;font-weight:800}
 .confetti-p{position:fixed;border-radius:2px;animation:fall linear forwards;pointer-events:none;z-index:300}
-@keyframes fall{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(105vh) rotate(720deg);opacity:0}}
-/* SCORE SUMMARY */
-.score-summary{background:white;border-radius:13px;padding:20px;border:2px solid #e0e0e0;margin-bottom:14px}
-.ss-title{font-size:17px;font-weight:700;color:#0a4a38;margin-bottom:14px}
-.ss-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:16px}
-.ss-row:last-child{border-bottom:none}
-.ss-label{color:#555}
-.ss-val{font-weight:800;color:#0a4a38;font-size:18px}
-.ss-val.great{color:#276749}
-.ss-val.ok{color:#d4a017}
-.ss-val.low{color:#c53030}
-@media(max-width:540px){.wgrid{grid-template-columns:1fr}.frow{grid-template-columns:1fr}}
+@keyframes fall{0%{transform:translateY(-10px) rotate(0);opacity:1}100%{transform:translateY(108vh) rotate(720deg);opacity:0}}
+@media(max-width:600px){.wgrid{grid-template-columns:1fr}.match-wrap{grid-template-columns:1fr}.tm{gap:8px}.fib-inp{width:110px}}
 </style>
 </head>
 <body>
 
 <div class="top-bar">
-  <div class="top-logo">📚 Vocabulary Adventure</div>
-  <div class="top-mid">
-    <span>👤 <span id="student-name">Student</span></span>
-    <span>Unit 4 of 4</span>
+  <div class="tl">📚 Community & Culture</div>
+  <div class="tm">
+    <span style="font-size:14px;color:rgba(255,255,255,.8)">👤 <span id="student-name">Student</span></span>
     <div class="timer-pill">⏱ <span id="timer-disp">00:00</span></div>
+    <div class="xp-bar-wrap" id="xp-display">⭐ 0 XP</div>
   </div>
 </div>
 <div class="global-prog"><div class="global-prog-fill" id="gprog"></div></div>
@@ -179,580 +191,426 @@ body{font-family:'Nunito',sans-serif;background:#f0f7f4;color:#1a1a1a;font-size:
   <div class="ph">
     <button class="back-btn" onclick="window.location='index.html'">← Home</button>
     <div>
-      <div class="unit-title">🏘️ Community & Culture</div>
-      <div class="unit-sub" id="step-label">Step 1 of 7</div>
+      <div class="unit-title">🏘️ Unit 4: Community & Culture</div>
+      <div class="unit-sub"><span id="step-label">Step 1 of 9</span> <span id="resume-tag" class="resume-tag" style="display:none">▶ Resumed</span></div>
     </div>
   </div>
 
-  <div class="book-shell">
-    <div class="book-spine-line"></div>
+  <div class="book">
+    <div class="spine"></div>
     <div class="book-head">
-      <div>
-        <div class="bh-step" id="step-label2">Step 1 of 7</div>
-        <div class="bh-title" id="step-title">Vocabulary Words</div>
+      <div class="bh-left">
+        <div class="bh-step" id="step-label2">Step 1 of 9</div>
+        <div class="bh-title" id="step-title">📚 Vocabulary Words</div>
       </div>
-      <div class="step-dots"><div class="sd"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div></div>
+      <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
     </div>
     <div class="book-body">
 
-      <!-- STEP 0: VOCABULARY WORDS -->
+      <!-- STEP 0: WORDS -->
       <div class="step active">
         <div class="atitle">📚 Learn the Words</div>
-        <div class="ainstr">Read each word carefully. Click 🔊 Listen to hear how it sounds. Learn the meaning and example sentence.</div>
+        <div class="ainstr">Read each word carefully. Click <strong>🔊 Listen</strong> to hear its pronunciation. Study the meaning and example sentence before moving on.</div>
         <div class="wgrid">
-        <div class="wcard">
-          <button class="speak-btn" data-speak="Tradition">🔊 Listen</button>
-          <div class="wword">Tradition</div>
-          <div class="wpron">/truh-DISH-un/</div>
-          <div class="wpos">Noun</div>
-          <div class="wdef">A custom or way of doing something that has been passed down through many generations.</div>
-          <div class="wex">"Celebrating Dashain is a beloved tradition for Nepali families everywhere."</div>
-        </div>
-        <div class="wcard">
-          <button class="speak-btn" data-speak="Cooperate">🔊 Listen</button>
-          <div class="wword">Cooperate</div>
-          <div class="wpron">/koh-OP-er-ayt/</div>
-          <div class="wpos">Verb</div>
-          <div class="wdef">To work together with others towards a shared goal.</div>
-          <div class="wex">"The students cooperate during group projects to get the best results."</div>
-        </div>
-        <div class="wcard">
-          <button class="speak-btn" data-speak="Diversity">🔊 Listen</button>
-          <div class="wword">Diversity</div>
-          <div class="wpron">/dih-VUR-sih-tee/</div>
-          <div class="wpos">Noun</div>
-          <div class="wdef">The variety of different people, cultures, ideas, and backgrounds in a place.</div>
-          <div class="wex">"Nepal is celebrated for its incredible cultural diversity."</div>
-        </div>
-        <div class="wcard">
-          <button class="speak-btn" data-speak="Citizen">🔊 Listen</button>
-          <div class="wword">Citizen</div>
-          <div class="wpron">/SIT-ih-zen/</div>
-          <div class="wpos">Noun</div>
-          <div class="wdef">A person who is a legal member of a particular country or community.</div>
-          <div class="wex">"Every citizen has both rights and responsibilities in their country."</div>
-        </div>
-        <div class="wcard">
-          <button class="speak-btn" data-speak="Heritage">🔊 Listen</button>
-          <div class="wword">Heritage</div>
-          <div class="wpron">/HER-ih-tij/</div>
-          <div class="wpos">Noun</div>
-          <div class="wdef">The traditions, values, and cultural practices passed down from older generations.</div>
-          <div class="wex">"The ancient temples of Kathmandu are part of Nepal's rich heritage."</div>
-        </div>
-        <div class="wcard">
-          <button class="speak-btn" data-speak="Volunteer">🔊 Listen</button>
-          <div class="wword">Volunteer</div>
-          <div class="wpron">/vol-un-TEER/</div>
-          <div class="wpos">Verb/Noun</div>
-          <div class="wdef">To freely offer your time to help others without receiving any payment.</div>
-          <div class="wex">"She chose to volunteer at the local school library every Saturday."</div>
-        </div></div>
+    <div class="wcard">
+      <button class="speak-btn" data-speak="Tradition">🔊 Listen</button>
+      <div class="wword">Tradition</div>
+      <div class="wpron">/truh-DISH-un/</div>
+      <div class="wpos">Noun</div>
+      <div class="wdef">A custom passed down through many generations in a community.</div>
+      <div class="wex">"Celebrating Dashain is a beloved tradition for Nepali families."</div>
+    </div>
+    <div class="wcard">
+      <button class="speak-btn" data-speak="Cooperate">🔊 Listen</button>
+      <div class="wword">Cooperate</div>
+      <div class="wpron">/koh-OP-er-ayt/</div>
+      <div class="wpos">Verb</div>
+      <div class="wdef">To work together with others towards a shared goal.</div>
+      <div class="wex">"The students cooperate on group projects to get the best results."</div>
+    </div>
+    <div class="wcard">
+      <button class="speak-btn" data-speak="Diversity">🔊 Listen</button>
+      <div class="wword">Diversity</div>
+      <div class="wpron">/dih-VUR-sih-tee/</div>
+      <div class="wpos">Noun</div>
+      <div class="wdef">The variety of different people, cultures, and ideas in a place.</div>
+      <div class="wex">"Nepal is celebrated for its incredible cultural diversity."</div>
+    </div>
+    <div class="wcard">
+      <button class="speak-btn" data-speak="Citizen">🔊 Listen</button>
+      <div class="wword">Citizen</div>
+      <div class="wpron">/SIT-ih-zen/</div>
+      <div class="wpos">Noun</div>
+      <div class="wdef">A legal member of a particular country or community.</div>
+      <div class="wex">"Every citizen has both rights and responsibilities in their country."</div>
+    </div>
+    <div class="wcard">
+      <button class="speak-btn" data-speak="Heritage">🔊 Listen</button>
+      <div class="wword">Heritage</div>
+      <div class="wpron">/HER-ih-tij/</div>
+      <div class="wpos">Noun</div>
+      <div class="wdef">Traditions and values passed down from older generations.</div>
+      <div class="wex">"The ancient temples of Kathmandu are part of Nepal's rich heritage."</div>
+    </div>
+    <div class="wcard">
+      <button class="speak-btn" data-speak="Volunteer">🔊 Listen</button>
+      <div class="wword">Volunteer</div>
+      <div class="wpron">/vol-un-TEER/</div>
+      <div class="wpos">Verb/Noun</div>
+      <div class="wdef">To freely give your time to help others without any payment.</div>
+      <div class="wex">"She chose to volunteer at the local library every Saturday."</div>
+    </div>
+    <div class="wcard">
+      <button class="speak-btn" data-speak="Harmony">🔊 Listen</button>
+      <div class="wword">Harmony</div>
+      <div class="wpron">/HAR-moh-nee/</div>
+      <div class="wpos">Noun</div>
+      <div class="wdef">A state of peaceful agreement and cooperation together.</div>
+      <div class="wex">"The different communities lived in perfect harmony in the valley."</div>
+    </div>
+    <div class="wcard">
+      <button class="speak-btn" data-speak="Preserve">🔊 Listen</button>
+      <div class="wword">Preserve</div>
+      <div class="wpron">/preh-ZURV/</div>
+      <div class="wpos">Verb</div>
+      <div class="wdef">To protect something important and keep it safe over time.</div>
+      <div class="wex">"We must preserve our ancient culture and traditional languages."</div>
+    </div></div>
         <div class="book-foot"><span></span><button class="btn-g" onclick="nextStep()">Next: Story →</button></div>
       </div>
 
-      <!-- STEP 1: AI STORY -->
+      <!-- STEP 1: STORY -->
       <div class="step">
         <div class="atitle">📖 Vocabulary Story</div>
-        <div class="ainstr">Read the story below. All the vocabulary words are used in the story. Notice how each word is used!</div>
-        <div class="story-label">Unit 4 Story</div>
-        <div class="story-box">Nepal is a land of amazing <b>diversity</b>. People of many different languages and cultures live together and <b>cooperate</b> every day. One important <b>tradition</b> is Dashain, where families come together to celebrate. The old temples and festivals are part of Nepal's <b>heritage</b> that every <b>citizen</b> feels proud of. Many young people also choose to <b>volunteer</b> and help their communities by cleaning rivers and teaching younger children.</div>
-        <div class="book-foot"><button class="btn-o" onclick="prevStep()">← Back</button><button class="btn-g" onclick="nextStep()">Next: Pronunciation →</button></div>
+        <div class="ainstr">Read the story carefully. Every vocabulary word is highlighted — notice how each word is used in a real sentence!</div>
+        <div class="story-label">📝 Unit 4 Story — Community & Culture</div>
+        <div class="story-box" style="margin-bottom:14px">Nepal is a land of amazing <b>diversity</b> where many different peoples, languages, and cultures live together in <b>harmony</b>. People <b>cooperate</b> every day in their communities — building schools together, cleaning rivers, and growing food. One important <b>tradition</b> is Dashain, where all family members return home to celebrate together. The old temples and festivals are part of Nepal's <b>heritage</b> that every <b>citizen</b> feels very proud of. Many young people choose to <b>volunteer</b> their time to help their communities. It is the responsibility of everyone to <b>preserve</b> these wonderful traditions for all future generations.</div>
+        <div class="book-foot"><button class='btn-o' onclick="window.location='unit3.html'">← Previous Unit</button><button class="btn-g" onclick="nextStep()">Next: Pronunciation →</button></div>
       </div>
 
       <!-- STEP 2: PRONUNCIATION -->
       <div class="step">
         <div class="atitle">🎧 Pronunciation Practice</div>
-        <div class="ainstr">Click each Listen button to hear the correct pronunciation. Say the word aloud after listening!</div>
-        <div class="pron-rows">
-        <div class="prow">
-          <div><div class="pw-word">Tradition</div><div class="pw-info">/truh-DISH-un/ &bull; Noun</div></div>
-          <button class="prow-btn" data-speak="Tradition">🔊 Listen</button>
-        </div>
-        <div class="prow">
-          <div><div class="pw-word">Cooperate</div><div class="pw-info">/koh-OP-er-ayt/ &bull; Verb</div></div>
-          <button class="prow-btn" data-speak="Cooperate">🔊 Listen</button>
-        </div>
-        <div class="prow">
-          <div><div class="pw-word">Diversity</div><div class="pw-info">/dih-VUR-sih-tee/ &bull; Noun</div></div>
-          <button class="prow-btn" data-speak="Diversity">🔊 Listen</button>
-        </div>
-        <div class="prow">
-          <div><div class="pw-word">Citizen</div><div class="pw-info">/SIT-ih-zen/ &bull; Noun</div></div>
-          <button class="prow-btn" data-speak="Citizen">🔊 Listen</button>
-        </div>
-        <div class="prow">
-          <div><div class="pw-word">Heritage</div><div class="pw-info">/HER-ih-tij/ &bull; Noun</div></div>
-          <button class="prow-btn" data-speak="Heritage">🔊 Listen</button>
-        </div>
-        <div class="prow">
-          <div><div class="pw-word">Volunteer</div><div class="pw-info">/vol-un-TEER/ &bull; Verb/Noun</div></div>
-          <button class="prow-btn" data-speak="Volunteer">🔊 Listen</button>
-        </div></div>
-        <div id="speech-note" class="speech-note" style="margin-top:12px"></div>
-        <div class="book-foot"><button class="btn-o" onclick="prevStep()">← Back</button><button class="btn-g" onclick="nextStep()">Next: Fill in Blanks →</button></div>
+        <div class="ainstr">Click <strong>🔊 Listen</strong> to hear each word spoken clearly. Repeat each word aloud at least 3 times! Make sure your device volume is turned ON.</div>
+        
+    <div class="prow">
+      <div><div class="pw-word">Tradition</div><div class="pw-info">/truh-DISH-un/ &bull; Noun</div></div>
+      <button class="prow-btn" data-speak="Tradition">🔊 Listen</button>
+    </div>
+    <div class="prow">
+      <div><div class="pw-word">Cooperate</div><div class="pw-info">/koh-OP-er-ayt/ &bull; Verb</div></div>
+      <button class="prow-btn" data-speak="Cooperate">🔊 Listen</button>
+    </div>
+    <div class="prow">
+      <div><div class="pw-word">Diversity</div><div class="pw-info">/dih-VUR-sih-tee/ &bull; Noun</div></div>
+      <button class="prow-btn" data-speak="Diversity">🔊 Listen</button>
+    </div>
+    <div class="prow">
+      <div><div class="pw-word">Citizen</div><div class="pw-info">/SIT-ih-zen/ &bull; Noun</div></div>
+      <button class="prow-btn" data-speak="Citizen">🔊 Listen</button>
+    </div>
+    <div class="prow">
+      <div><div class="pw-word">Heritage</div><div class="pw-info">/HER-ih-tij/ &bull; Noun</div></div>
+      <button class="prow-btn" data-speak="Heritage">🔊 Listen</button>
+    </div>
+    <div class="prow">
+      <div><div class="pw-word">Volunteer</div><div class="pw-info">/vol-un-TEER/ &bull; Verb/Noun</div></div>
+      <button class="prow-btn" data-speak="Volunteer">🔊 Listen</button>
+    </div>
+    <div class="prow">
+      <div><div class="pw-word">Harmony</div><div class="pw-info">/HAR-moh-nee/ &bull; Noun</div></div>
+      <button class="prow-btn" data-speak="Harmony">🔊 Listen</button>
+    </div>
+    <div class="prow">
+      <div><div class="pw-word">Preserve</div><div class="pw-info">/preh-ZURV/ &bull; Verb</div></div>
+      <button class="prow-btn" data-speak="Preserve">🔊 Listen</button>
+    </div>
+        <div id="speech-note" class="speech-note"></div>
+        <div class="book-foot"><button class='btn-o' onclick="window.location='unit3.html'">← Previous Unit</button><button class="btn-g" onclick="nextStep()">Next: Fill in Blanks →</button></div>
       </div>
 
       <!-- STEP 3: FILL IN BLANKS -->
-      <div class="step">
+      <div class="step" id="step-fib">
         <div class="atitle">📝 Fill in the Blanks</div>
-        <div class="ainstr">Complete each sentence by typing the correct vocabulary word. You must get all 4 correct to continue!</div>
-        <div class="fib-list">
-        <div class="fib-card">
-          <div class="fib-sentence">Tihar is a special <input class="fib-input" data-answer="tradition" placeholder="______"> that Nepali families celebrate every autumn.</div>
-          <div class="fib-actions">
-            <button class="fib-check-btn" onclick="checkFIB(this.closest('.fib-card'))">Check ✓</button>
-            <div class="fib-fb"></div>
-          </div>
-        </div>
-        <div class="fib-card">
-          <div class="fib-sentence">The students decided to <input class="fib-input" data-answer="cooperate" placeholder="______"> and clean the school garden together.</div>
-          <div class="fib-actions">
-            <button class="fib-check-btn" onclick="checkFIB(this.closest('.fib-card'))">Check ✓</button>
-            <div class="fib-fb"></div>
-          </div>
-        </div>
-        <div class="fib-card">
-          <div class="fib-sentence">The old temples of Kathmandu show the beautiful <input class="fib-input" data-answer="heritage" placeholder="______"> of Nepal.</div>
-          <div class="fib-actions">
-            <button class="fib-check-btn" onclick="checkFIB(this.closest('.fib-card'))">Check ✓</button>
-            <div class="fib-fb"></div>
-          </div>
-        </div>
-        <div class="fib-card">
-          <div class="fib-sentence">He chose to <input class="fib-input" data-answer="volunteer" placeholder="______"> at the hospital to help people who were sick.</div>
-          <div class="fib-actions">
-            <button class="fib-check-btn" onclick="checkFIB(this.closest('.fib-card'))">Check ✓</button>
-            <div class="fib-fb"></div>
-          </div>
-        </div></div>
-        <div class="book-foot"><button class="btn-o" onclick="prevStep()">← Back</button><button class="btn-g" id="fib-next" onclick="nextStep()" disabled>Next: Word Scramble →</button></div>
+        <div class="ainstr">Type the correct vocabulary word to complete each sentence. You earn <strong>⭐ 10 XP</strong> for every correct answer! Answer all <strong>8</strong> to continue.</div>
+        
+    <div class="fib-card">
+      <div class="fib-sentence">Tihar is a special <input class="fib-inp" data-answer="tradition" placeholder="______"> that Nepali families celebrate together every autumn.</div>
+      <div class="fib-actions"><button class="fib-check" onclick="checkFIB(this.closest('.fib-card'))">Check ✓</button><div class="fib-fb"></div></div>
+    </div>
+    <div class="fib-card">
+      <div class="fib-sentence">The students decided to <input class="fib-inp" data-answer="cooperate" placeholder="______"> and clean the entire school garden as a team.</div>
+      <div class="fib-actions"><button class="fib-check" onclick="checkFIB(this.closest('.fib-card'))">Check ✓</button><div class="fib-fb"></div></div>
+    </div>
+    <div class="fib-card">
+      <div class="fib-sentence">The old temples of Kathmandu are a beautiful part of Nepal's <input class="fib-inp" data-answer="heritage" placeholder="______"> and history.</div>
+      <div class="fib-actions"><button class="fib-check" onclick="checkFIB(this.closest('.fib-card'))">Check ✓</button><div class="fib-fb"></div></div>
+    </div>
+    <div class="fib-card">
+      <div class="fib-sentence">He chose to <input class="fib-inp" data-answer="volunteer" placeholder="______"> at the local hospital to help people who were very sick.</div>
+      <div class="fib-actions"><button class="fib-check" onclick="checkFIB(this.closest('.fib-card'))">Check ✓</button><div class="fib-fb"></div></div>
+    </div>
+    <div class="fib-card">
+      <div class="fib-sentence">The different groups of people in the village lived in perfect <input class="fib-inp" data-answer="harmony" placeholder="______"> together.</div>
+      <div class="fib-actions"><button class="fib-check" onclick="checkFIB(this.closest('.fib-card'))">Check ✓</button><div class="fib-fb"></div></div>
+    </div>
+    <div class="fib-card">
+      <div class="fib-sentence">It is very important to <input class="fib-inp" data-answer="preserve" placeholder="______"> our traditional languages and cultural practices.</div>
+      <div class="fib-actions"><button class="fib-check" onclick="checkFIB(this.closest('.fib-card'))">Check ✓</button><div class="fib-fb"></div></div>
+    </div>
+    <div class="fib-card">
+      <div class="fib-sentence">Nepal's great cultural <input class="fib-inp" data-answer="diversity" placeholder="______"> means that many different ethnic groups live here.</div>
+      <div class="fib-actions"><button class="fib-check" onclick="checkFIB(this.closest('.fib-card'))">Check ✓</button><div class="fib-fb"></div></div>
+    </div>
+    <div class="fib-card">
+      <div class="fib-sentence">Every <input class="fib-inp" data-answer="citizen" placeholder="______"> has a responsibility to follow the laws and help their community.</div>
+      <div class="fib-actions"><button class="fib-check" onclick="checkFIB(this.closest('.fib-card'))">Check ✓</button><div class="fib-fb"></div></div>
+    </div>
+        <div class="fib-score-bar"><div class="fib-score-fill" id="fib-bar" style="width:0%"></div></div>
+        <div class="book-foot"><button class='btn-o' onclick="window.location='unit3.html'">← Previous Unit</button><button class="btn-g" id="fib-next" onclick="nextStep()" disabled>Next: True or False →</button></div>
       </div>
 
-      <!-- STEP 4: SCRAMBLE -->
-      <div class="step">
+      <!-- STEP 4: TRUE/FALSE -->
+      <div class="step" id="step-tf">
+        <div class="atitle">✅ True or False</div>
+        <div class="ainstr">Read each statement carefully. Decide if it is <strong>TRUE</strong> or <strong>FALSE</strong> and click your answer. You earn <strong>⭐ 10 XP</strong> for each correct answer!</div>
+        
+    <div class="tf-card">
+      <div class="tf-stmt">1. &ldquo;A tradition is a custom passed down through many generations.&rdquo;</div>
+      <div class="tf-btns">
+        <button class="tf-btn t-btn" onclick="handleTF(this,true,true,this.closest('.tf-card'))">✅ TRUE</button>
+        <button class="tf-btn f-btn" onclick="handleTF(this,false,true,this.closest('.tf-card'))">❌ FALSE</button>
+      </div>
+      <div class="tf-fb"></div>
+    </div>
+    <div class="tf-card">
+      <div class="tf-stmt">2. &ldquo;Volunteering means you get paid a large salary for your work.&rdquo;</div>
+      <div class="tf-btns">
+        <button class="tf-btn t-btn" onclick="handleTF(this,true,false,this.closest('.tf-card'))">✅ TRUE</button>
+        <button class="tf-btn f-btn" onclick="handleTF(this,false,false,this.closest('.tf-card'))">❌ FALSE</button>
+      </div>
+      <div class="tf-fb"></div>
+    </div>
+    <div class="tf-card">
+      <div class="tf-stmt">3. &ldquo;Diversity means everyone in a place is exactly the same.&rdquo;</div>
+      <div class="tf-btns">
+        <button class="tf-btn t-btn" onclick="handleTF(this,true,false,this.closest('.tf-card'))">✅ TRUE</button>
+        <button class="tf-btn f-btn" onclick="handleTF(this,false,false,this.closest('.tf-card'))">❌ FALSE</button>
+      </div>
+      <div class="tf-fb"></div>
+    </div>
+    <div class="tf-card">
+      <div class="tf-stmt">4. &ldquo;Heritage refers to traditions passed down from older generations.&rdquo;</div>
+      <div class="tf-btns">
+        <button class="tf-btn t-btn" onclick="handleTF(this,true,true,this.closest('.tf-card'))">✅ TRUE</button>
+        <button class="tf-btn f-btn" onclick="handleTF(this,false,true,this.closest('.tf-card'))">❌ FALSE</button>
+      </div>
+      <div class="tf-fb"></div>
+    </div>
+    <div class="tf-card">
+      <div class="tf-stmt">5. &ldquo;To cooperate means to work together towards a shared goal.&rdquo;</div>
+      <div class="tf-btns">
+        <button class="tf-btn t-btn" onclick="handleTF(this,true,true,this.closest('.tf-card'))">✅ TRUE</button>
+        <button class="tf-btn f-btn" onclick="handleTF(this,false,true,this.closest('.tf-card'))">❌ FALSE</button>
+      </div>
+      <div class="tf-fb"></div>
+    </div>
+    <div class="tf-card">
+      <div class="tf-stmt">6. &ldquo;Harmony means a state of conflict and constant disagreement.&rdquo;</div>
+      <div class="tf-btns">
+        <button class="tf-btn t-btn" onclick="handleTF(this,true,false,this.closest('.tf-card'))">✅ TRUE</button>
+        <button class="tf-btn f-btn" onclick="handleTF(this,false,false,this.closest('.tf-card'))">❌ FALSE</button>
+      </div>
+      <div class="tf-fb"></div>
+    </div>
+        <div class="book-foot"><button class='btn-o' onclick="window.location='unit3.html'">← Previous Unit</button><button class="btn-g" id="tf-next" onclick="nextStep()" disabled>Next: Word Scramble →</button></div>
+      </div>
+
+      <!-- STEP 5: SCRAMBLE -->
+      <div class="step" id="step-scr">
         <div class="atitle">🧩 Word Scramble</div>
-        <div class="ainstr">The letters of each vocabulary word are jumbled! Unscramble them and type the correct word. Use the hint if you need help!</div>
-        <div class="scr-list">
-        <div class="scr-card">
-          <div class="scr-jumbled">N E Z I T I C</div>
-          <div class="scr-hint">💡 Hint: A member of a country or community</div>
-          <div class="scr-row">
-            <input class="scr-inp" data-answer="citizen" placeholder="Type the word here...">
-            <button class="scr-btn" onclick="checkScramble(this.closest('.scr-card'))">Check</button>
-          </div>
-          <div class="scr-fb"></div>
-        </div>
-        <div class="scr-card">
-          <div class="scr-jumbled">R E E T N L O V U</div>
-          <div class="scr-hint">💡 Hint: To help others freely without pay</div>
-          <div class="scr-row">
-            <input class="scr-inp" data-answer="volunteer" placeholder="Type the word here...">
-            <button class="scr-btn" onclick="checkScramble(this.closest('.scr-card'))">Check</button>
-          </div>
-          <div class="scr-fb"></div>
-        </div>
-        <div class="scr-card">
-          <div class="scr-jumbled">Y T I S R E V I D</div>
-          <div class="scr-hint">💡 Hint: Variety of different people and cultures</div>
-          <div class="scr-row">
-            <input class="scr-inp" data-answer="diversity" placeholder="Type the word here...">
-            <button class="scr-btn" onclick="checkScramble(this.closest('.scr-card'))">Check</button>
-          </div>
-          <div class="scr-fb"></div>
-        </div></div>
-        <div class="book-foot"><button class="btn-o" onclick="prevStep()">← Back</button><button class="btn-g" id="scr-next" onclick="nextStep()" disabled>Next: Quiz →</button></div>
+        <div class="ainstr">The letters are jumbled! Unscramble them to find each vocabulary word. Use the hint if you need help. You earn <strong>⭐ 10 XP</strong> for each one you solve!</div>
+        
+    <div class="scr-card">
+      <div class="scr-jumbled">N E Z I T I C</div>
+      <div class="scr-hint">💡 Hint: A member of a country or community</div>
+      <div class="scr-row">
+        <input class="scr-inp" data-answer="citizen" placeholder="Type the word...">
+        <button class="scr-btn" onclick="checkScr(this.closest('.scr-card'))">Check</button>
+      </div>
+      <div class="scr-fb"></div>
+    </div>
+    <div class="scr-card">
+      <div class="scr-jumbled">R E E T N L O V U</div>
+      <div class="scr-hint">💡 Hint: To help others freely without pay</div>
+      <div class="scr-row">
+        <input class="scr-inp" data-answer="volunteer" placeholder="Type the word...">
+        <button class="scr-btn" onclick="checkScr(this.closest('.scr-card'))">Check</button>
+      </div>
+      <div class="scr-fb"></div>
+    </div>
+    <div class="scr-card">
+      <div class="scr-jumbled">Y T I S R E V I D</div>
+      <div class="scr-hint">💡 Hint: Variety of different people and cultures</div>
+      <div class="scr-row">
+        <input class="scr-inp" data-answer="diversity" placeholder="Type the word...">
+        <button class="scr-btn" onclick="checkScr(this.closest('.scr-card'))">Check</button>
+      </div>
+      <div class="scr-fb"></div>
+    </div>
+    <div class="scr-card">
+      <div class="scr-jumbled">Y N O M R A H</div>
+      <div class="scr-hint">💡 Hint: Peaceful agreement together</div>
+      <div class="scr-row">
+        <input class="scr-inp" data-answer="harmony" placeholder="Type the word...">
+        <button class="scr-btn" onclick="checkScr(this.closest('.scr-card'))">Check</button>
+      </div>
+      <div class="scr-fb"></div>
+    </div>
+    <div class="scr-card">
+      <div class="scr-jumbled">E V R E S E R P</div>
+      <div class="scr-hint">💡 Hint: To protect something important</div>
+      <div class="scr-row">
+        <input class="scr-inp" data-answer="preserve" placeholder="Type the word...">
+        <button class="scr-btn" onclick="checkScr(this.closest('.scr-card'))">Check</button>
+      </div>
+      <div class="scr-fb"></div>
+    </div>
+    <div class="scr-card">
+      <div class="scr-jumbled">N O I T I D A R T</div>
+      <div class="scr-hint">💡 Hint: A custom from past generations</div>
+      <div class="scr-row">
+        <input class="scr-inp" data-answer="tradition" placeholder="Type the word...">
+        <button class="scr-btn" onclick="checkScr(this.closest('.scr-card'))">Check</button>
+      </div>
+      <div class="scr-fb"></div>
+    </div>
+        <div class="book-foot"><button class='btn-o' onclick="window.location='unit3.html'">← Previous Unit</button><button class="btn-g" id="scr-next" onclick="nextStep()" disabled>Next: Word Matching →</button></div>
       </div>
 
-      <!-- STEP 5: MULTIPLE CHOICE -->
-      <div class="step">
-        <div class="atitle">✅ Multiple Choice Quiz</div>
-        <div class="ainstr">Choose the best answer for each question. You must answer all 3 questions to continue!</div>
-        <div class="mc-list">
-        <div class="mc-block">
-          <div class="mc-q">1. What does <strong>diversity</strong> mean in a community?</div>
-          <div class="mc-opts"><button class="mc-opt" data-correct="0" onclick="handleMCAnswer(this,false,this.closest('.mc-block'))">When everyone in a place is exactly the same.</button><button class="mc-opt" data-correct="1" onclick="handleMCAnswer(this,true,this.closest('.mc-block'))">The variety of different people, cultures, and ideas in a place.</button><button class="mc-opt" data-correct="0" onclick="handleMCAnswer(this,false,this.closest('.mc-block'))">A type of traditional food eaten at festivals.</button></div>
-          <div class="mc-fb"></div>
+      <!-- STEP 6: MATCHING -->
+      <div class="step" id="step-match">
+        <div class="atitle">🔗 Word Matching</div>
+        <div class="ainstr">Click a <strong>green word</strong> on the left, then click its matching definition on the right. You earn <strong>⭐ 10 XP</strong> for each correct match!</div>
+        <div class="match-wrap">
+          <div class="match-col"><div class="match-word" onclick="selectWord(this,'Tradition')">Tradition</div><div class="match-word" onclick="selectWord(this,'Cooperate')">Cooperate</div><div class="match-word" onclick="selectWord(this,'Diversity')">Diversity</div><div class="match-word" onclick="selectWord(this,'Citizen')">Citizen</div><div class="match-word" onclick="selectWord(this,'Heritage')">Heritage</div><div class="match-word" onclick="selectWord(this,'Volunteer')">Volunteer</div><div class="match-word" onclick="selectWord(this,'Harmony')">Harmony</div><div class="match-word" onclick="selectWord(this,'Preserve')">Preserve</div></div>
+          <div class="match-col"><div class="match-def" onclick="selectDef(this,'Volunteer')">To help others freely without pay</div><div class="match-def" onclick="selectDef(this,'Tradition')">A custom passed down through generations</div><div class="match-def" onclick="selectDef(this,'Diversity')">Variety of different people and cultures</div><div class="match-def" onclick="selectDef(this,'Preserve')">To protect something important</div><div class="match-def" onclick="selectDef(this,'Harmony')">Peaceful agreement together</div><div class="match-def" onclick="selectDef(this,'Heritage')">Traditions from older generations</div><div class="match-def" onclick="selectDef(this,'Citizen')">A legal member of a country</div><div class="match-def" onclick="selectDef(this,'Cooperate')">To work together towards a shared goal</div></div>
         </div>
-        <div class="mc-block">
-          <div class="mc-q">2. When you <strong>volunteer</strong>, you…</div>
-          <div class="mc-opts"><button class="mc-opt" data-correct="0" onclick="handleMCAnswer(this,false,this.closest('.mc-block'))">Receive a large amount of money for your work.</button><button class="mc-opt" data-correct="1" onclick="handleMCAnswer(this,true,this.closest('.mc-block'))">Freely give your time to help others without pay.</button><button class="mc-opt" data-correct="0" onclick="handleMCAnswer(this,false,this.closest('.mc-block'))">Are forced by your teacher to do extra work.</button></div>
-          <div class="mc-fb"></div>
-        </div>
-        <div class="mc-block">
-          <div class="mc-q">3. Which is an example of people <strong>cooperating</strong>?</div>
-          <div class="mc-opts"><button class="mc-opt" data-correct="0" onclick="handleMCAnswer(this,false,this.closest('.mc-block'))">Two students arguing about who has the right answer.</button><button class="mc-opt" data-correct="0" onclick="handleMCAnswer(this,false,this.closest('.mc-block'))">A student doing all the group work alone.</button><button class="mc-opt" data-correct="1" onclick="handleMCAnswer(this,true,this.closest('.mc-block'))">A team working together to build a school garden.</button></div>
-          <div class="mc-fb"></div>
-        </div></div>
-        <div class="book-foot"><button class="btn-o" onclick="prevStep()">← Back</button><button class="btn-g" id="mc-next" onclick="nextStep()" disabled>Next: Open Response →</button></div>
+        <div class="match-score" id="match-score">✓ Matched: 0 / 8</div>
+        <div class="book-foot"><button class='btn-o' onclick="window.location='unit3.html'">← Previous Unit</button><button class="btn-g" id="match-next" onclick="nextStep()" disabled>Next: Multiple Choice →</button></div>
       </div>
 
-      <!-- STEP 6: OPEN RESPONSE + AI -->
+      <!-- STEP 7: MULTIPLE CHOICE -->
+      <div class="step" id="step-mc">
+        <div class="atitle">🏆 Multiple Choice Quiz</div>
+        <div class="ainstr">Choose the best answer for each question. Read all options carefully! You earn <strong>⭐ 10 XP</strong> for each correct answer. Answer all <strong>8</strong> to continue.</div>
+        
+    <div class="mc-block">
+      <div class="mc-q"><span class="qn">Q1.</span> What does <strong>diversity</strong> mean?</div>
+      <div class="mc-opts"><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">When everyone is exactly the same.</button><button class="mc-opt" data-correct="1" onclick="handleMC(this,true,this.closest('.mc-block'))">The variety of different people, cultures, and ideas.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">A type of food from another country.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">A traditional festival.</button></div>
+      <div class="mc-fb"></div>
+    </div>
+    <div class="mc-block">
+      <div class="mc-q"><span class="qn">Q2.</span> When you <strong>volunteer</strong>, you…</div>
+      <div class="mc-opts"><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Receive a large salary for your work.</button><button class="mc-opt" data-correct="1" onclick="handleMC(this,true,this.closest('.mc-block'))">Freely give time to help others without pay.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Are forced to work by the government.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Work only for your own personal benefit.</button></div>
+      <div class="mc-fb"></div>
+    </div>
+    <div class="mc-block">
+      <div class="mc-q"><span class="qn">Q3.</span> Which is the best example of people <strong>cooperating</strong>?</div>
+      <div class="mc-opts"><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Two students arguing about the right answer.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">A student doing all group work alone.</button><button class="mc-opt" data-correct="1" onclick="handleMC(this,true,this.closest('.mc-block'))">A team working together to build a school garden.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">A person refusing to help their neighbour.</button></div>
+      <div class="mc-fb"></div>
+    </div>
+    <div class="mc-block">
+      <div class="mc-q"><span class="qn">Q4.</span> What is <strong>heritage</strong>?</div>
+      <div class="mc-opts"><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">A type of modern technology.</button><button class="mc-opt" data-correct="1" onclick="handleMC(this,true,this.closest('.mc-block'))">Traditions and values passed down from older generations.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">A new building in the city.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">A type of food eaten at parties.</button></div>
+      <div class="mc-fb"></div>
+    </div>
+    <div class="mc-block">
+      <div class="mc-q"><span class="qn">Q5.</span> Living in <strong>harmony</strong> means…</div>
+      <div class="mc-opts"><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Fighting constantly with neighbours.</button><button class="mc-opt" data-correct="1" onclick="handleMC(this,true,this.closest('.mc-block'))">Living in peaceful agreement with others.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Ignoring everyone around you.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Competing against everyone always.</button></div>
+      <div class="mc-fb"></div>
+    </div>
+    <div class="mc-block">
+      <div class="mc-q"><span class="qn">Q6.</span> Why is it important to <strong>preserve</strong> our culture?</div>
+      <div class="mc-opts"><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Because old things are always better than new ones.</button><button class="mc-opt" data-correct="1" onclick="handleMC(this,true,this.closest('.mc-block'))">To protect traditions and keep them alive for future generations.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Because the government forces us to.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">It is not important to preserve anything at all.</button></div>
+      <div class="mc-fb"></div>
+    </div>
+    <div class="mc-block">
+      <div class="mc-q"><span class="qn">Q7.</span> A <strong>citizen</strong> is someone who…</div>
+      <div class="mc-opts"><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Is visiting a country on a short holiday.</button><button class="mc-opt" data-correct="1" onclick="handleMC(this,true,this.closest('.mc-block'))">Is a legal member of a particular country.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Has no rights or responsibilities at all.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Only lives in a big city.</button></div>
+      <div class="mc-fb"></div>
+    </div>
+    <div class="mc-block">
+      <div class="mc-q"><span class="qn">Q8.</span> Which is an example of a cultural <strong>tradition</strong>?</div>
+      <div class="mc-opts"><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Building a new road through a village.</button><button class="mc-opt" data-correct="1" onclick="handleMC(this,true,this.closest('.mc-block'))">Families gathering every year to celebrate Dashain together.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Buying a new television set.</button><button class="mc-opt" data-correct="0" onclick="handleMC(this,false,this.closest('.mc-block'))">Going to a shopping mall.</button></div>
+      <div class="mc-fb"></div>
+    </div>
+        <div class="book-foot"><button class='btn-o' onclick="window.location='unit3.html'">← Previous Unit</button><button class="btn-g" id="mc-next" onclick="nextStep()" disabled>Next: Open Response →</button></div>
+      </div>
+
+      <!-- STEP 8: OPEN RESPONSE + AI HELPER -->
       <div class="step">
         <div class="atitle">✍️ Write Your Response</div>
-        <div class="ainstr">Write your own answer and then ask your AI vocabulary helper any questions!</div>
+        <div class="ainstr">Write your own answer to the question below. Save it, then ask your offline vocabulary helper any questions about the unit words!</div>
         <div class="open-box">
-          <div class="open-q">💬 Write 2 sentences about one tradition from your family or community.</div>
-          <textarea class="open-ta" id="open-textarea" placeholder="Write your answer here..."></textarea>
-          <button class="open-save" onclick="saveOpenResponse()">💾 Save My Response</button>
-          <div class="open-saved-msg" id="open-saved">✅ Response saved!</div>
+          <div class="open-q">💬 Describe one important tradition from your community or family. Why is it important to preserve it? Write at least 3 sentences and use vocabulary words from this unit.</div>
+          <textarea class="open-ta" id="open-ta" placeholder="Write your answer here in full sentences..."></textarea>
+          <button class="open-save" onclick="saveOpenResp()">💾 Save My Response</button>
+          <div class="open-ok" id="open-ok">✅ Your response has been saved!</div>
         </div>
         <div class="ai-box">
-          <div class="ai-head"><div class="ai-pulse"></div>🤖 AI Vocabulary Helper</div>
+          <div class="ai-head"><div class="ai-dot"></div>🤖 Vocabulary Helper — Works Offline!</div>
+          <div class="ai-offline">📵 This helper works completely offline — no internet needed! Just type any word from this unit and I will explain it for you.</div>
           <div class="ai-msgs" id="ai-msgs"></div>
           <div class="ai-row">
-            <input class="ai-in" id="ai-input" placeholder="Ask me about any word from this unit…">
-            <button class="ai-send" id="ai-send" onclick="sendAI(UNIT_NAME)">Ask ↗</button>
+            <input class="ai-in" id="ai-in" placeholder="Type any vocabulary word to get help…">
+            <button class="ai-send" id="ai-send" onclick="sendAI()">Ask ↗</button>
           </div>
         </div>
         <div class="book-foot">
-          <button class="btn-o" onclick="prevStep()">← Back</button>
-          <button class="btn-g" id="open-next" onclick="showCompleteModal(4,'Community & Culture','🏘️',null)" disabled>Complete Unit 🎉</button>
+          <button class='btn-o' onclick="window.location='unit3.html'">← Previous Unit</button>
+          <button class="btn-g" id="open-next" onclick="saveAndComplete(null)" disabled>Complete Unit 🎉</button>
         </div>
       </div>
 
-    </div>
-  </div>
-</div>
+    </div><!-- book-body -->
+  </div><!-- book -->
+</div><!-- page-wrap -->
 
 <!-- COMPLETE MODAL -->
 <div class="modal-bg" id="complete-modal">
   <div class="modal-box">
-    <div class="modal-icon">🏘️</div>
-    <div class="modal-h">Unit Complete!</div>
-    <div class="modal-p">Amazing work! You have finished <strong>Community & Culture</strong>!</div>
-    <div class="modal-badge">🏅 Community Scholar</div>
+    <div class="modal-badge-icon" id="modal-badge-icon">🏘️</div>
+    <div class="modal-h">Unit 4 Complete! 🎉</div>
+    <div class="modal-p">Fantastic! You have finished <strong>Community & Culture</strong>! Here are your results:</div>
+    <div class="modal-badge-name" id="modal-badge-name">🏘️ Scholar Badge Earned!</div>
+    <div class="modal-xp" id="modal-xp"></div>
     <div id="modal-scores"></div>
     <div class="modal-btns">
-      <button class="btn-g" id="modal-next-btn" style="display:none"></button>
+      <button class="btn-g" id="modal-next-btn"></button>
       <button class="btn-o" onclick="document.getElementById('complete-modal').classList.remove('show')">Review This Unit</button>
     </div>
   </div>
 </div>
 
+<script src="shared.js"></script>
 <script>
-const UNIT_NAME = 'Community & Culture';
-
-// ── STATE ──
-function getPart(){
-  const pid=localStorage.getItem('vc_current');
-  if(!pid)return null;
-  try{return JSON.parse(localStorage.getItem('vcp_'+pid)||'null');}catch{return null;}
-}
-function savePart(p){
-  if(!p)return;
-  p.lastActive=new Date().toISOString();
-  localStorage.setItem('vcp_'+p.pid,JSON.stringify(p));
-}
-
-// ── TIMER ──
-let sec=0,tiv=null;
-function startTimer(){
-  const p=getPart();sec=(p&&p.totalTime)||0;
-  clearInterval(tiv);
-  tiv=setInterval(()=>{
-    sec++;
-    const p2=getPart();if(p2){p2.totalTime=sec;savePart(p2);}
-    renderTimer();
-  },1000);
-}
-function renderTimer(){
-  const m=Math.floor(sec/60),s=sec%60;
-  const el=document.getElementById('timer-disp');
-  if(el)el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
-}
-function renderProgress(){
-  const p=getPart();
-  const done=p?(p.unitsCompleted||[]).length:0;
-  const pct=done/4*100;
-  const el=document.getElementById('gprog');if(el)el.style.width=pct+'%';
-  const el2=document.getElementById('unit-prog-bar');if(el2)el2.style.width=pct+'%';
-}
-
-// ── PRONUNCIATION ──
-let currentUtt=null;
-function speak(word,btnEl){
-  if(!window.speechSynthesis){alert('Your browser does not support text-to-speech. Try Chrome or Edge.');return;}
-  if(currentUtt){window.speechSynthesis.cancel();currentUtt=null;}
-  document.querySelectorAll('.speak-btn,.prow-btn').forEach(b=>{b.classList.remove('playing');b.textContent=b.dataset.label||'🔊 Listen';});
-  const u=new SpeechSynthesisUtterance(word);
-  u.rate=0.8;u.pitch=1.1;u.lang='en-US';u.volume=1;
-  u.onstart=()=>{if(btnEl){btnEl.classList.add('playing');btnEl.textContent='🔊 Playing…';}};
-  u.onend=()=>{if(btnEl){btnEl.classList.remove('playing');btnEl.textContent=btnEl.dataset.label||'🔊 Listen';}currentUtt=null;};
-  u.onerror=()=>{if(btnEl){btnEl.classList.remove('playing');btnEl.textContent=btnEl.dataset.label||'🔊 Listen';}currentUtt=null;};
-  currentUtt=u;
-  window.speechSynthesis.speak(u);
-}
-
-// Wire all speak buttons after DOM loads
-function wireSpeakButtons(){
-  document.querySelectorAll('[data-speak]').forEach(btn=>{
-    btn.dataset.label=btn.textContent;
-    btn.onclick=()=>speak(btn.dataset.speak,btn);
+const UNIT_NUM = 4;
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = getSavedStep(4);
+  if (saved > 0) {
+    const tag = document.getElementById('resume-tag');
+    if (tag) tag.style.display = 'inline-block';
+  }
+  initSteps(4);
+  const sl2 = document.getElementById('step-label2');
+  // sync second label with step changes
+  const observer = new MutationObserver(() => {
+    if (sl2) sl2.textContent = document.getElementById('step-label')?.textContent || '';
   });
-}
-
-// ── STEPS ──
-let curStep=0,totalSteps=0;
-const stepTitles=['Vocabulary Words','AI Story','Pronunciation','Fill in the Blanks','Word Scramble','Multiple Choice Quiz','Open Response & AI Helper'];
-
-function initSteps(n){
-  totalSteps=n;curStep=0;
-  renderStep();
-}
-
-function renderStep(){
-  document.querySelectorAll('.step').forEach((s,i)=>{
-    s.classList.toggle('active',i===curStep);
-  });
-  document.querySelectorAll('.sd').forEach((d,i)=>{
-    d.classList.remove('active','done');
-    if(i<curStep)d.classList.add('done');
-    else if(i===curStep)d.classList.add('active');
-  });
-  const stepEl=document.getElementById('step-label');
-  if(stepEl)stepEl.textContent='Step '+(curStep+1)+' of '+totalSteps;
-  const titleEl=document.getElementById('step-title');
-  if(titleEl)titleEl.textContent=stepTitles[curStep]||'';
-  wireSpeakButtons();
-  if(curStep===2)checkSpeechSupport();
-  if(curStep===4)initScramble();
-  if(curStep===5)initMC();
-  if(curStep===6)initAI();
-  window.scrollTo(0,0);
-}
-function nextStep(){if(curStep<totalSteps-1){curStep++;renderStep();}}
-function prevStep(){if(curStep>0){curStep--;renderStep();}}
-
-// ── SPEECH SUPPORT CHECK ──
-function checkSpeechSupport(){
-  const note=document.getElementById('speech-note');
-  if(!note)return;
-  if(!window.speechSynthesis){
-    note.textContent='⚠️ Text-to-speech is not available in your browser. Please use Google Chrome or Microsoft Edge for pronunciation audio.';
-    note.style.background='#fff5f5';note.style.borderColor='#fc8181';
-  } else {
-    note.textContent='✅ Click any Listen button to hear the word. Make sure your device volume is turned on!';
-  }
-}
-
-// ── FILL IN BLANKS ──
-let fibCorrect=0,fibTotal=0;
-function initFIB(){
-  fibCorrect=0;
-  fibTotal=document.querySelectorAll('.fib-card').length;
-  updateFIBNext();
-}
-function checkFIB(card){
-  if(card.classList.contains('ok'))return;
-  const inp=card.querySelector('.fib-input');
-  const fb=card.querySelector('.fib-fb');
-  const answer=inp.dataset.answer.toLowerCase();
-  const val=inp.value.trim().toLowerCase();
-  if(val===answer){
-    card.classList.add('ok');inp.setAttribute('readonly','');
-    fb.textContent='✓ Correct! Well done!';fb.className='fib-fb ok';
-    fibCorrect++;updateFIBNext();
-  } else if(val===''){
-    fb.textContent='Please type your answer first.';fb.className='fib-fb no';
-  } else {
-    card.classList.add('no');
-    fb.textContent='Not quite. Hint: starts with "'+answer[0].toUpperCase()+'"';fb.className='fib-fb no';
-    setTimeout(()=>{card.classList.remove('no');fb.textContent='';fb.className='fib-fb';},2500);
-  }
-}
-function updateFIBNext(){
-  const btn=document.getElementById('fib-next');
-  if(btn){btn.disabled=fibCorrect<fibTotal;}
-}
-
-// ── SCRAMBLE ──
-let scrCorrect=0,scrTotal=0;
-function initScramble(){
-  scrCorrect=0;
-  scrTotal=document.querySelectorAll('.scr-card').length;
-  updateScrNext();
-}
-function checkScramble(card){
-  if(card.classList.contains('ok'))return;
-  const inp=card.querySelector('.scr-inp');
-  const fb=card.querySelector('.scr-fb');
-  const answer=inp.dataset.answer.toLowerCase();
-  const val=inp.value.trim().toLowerCase();
-  if(val===answer){
-    card.classList.add('ok');inp.setAttribute('readonly','');
-    fb.textContent='🎉 Excellent! You unscrambled it!';fb.className='scr-fb ok';
-    scrCorrect++;updateScrNext();
-  } else if(val===''){
-    fb.textContent='Please type your answer first.';fb.className='scr-fb no';
-  } else {
-    fb.textContent='Not quite! Try again.';fb.className='scr-fb no';
-    setTimeout(()=>{fb.textContent='';fb.className='scr-fb';},2200);
-  }
-}
-function updateScrNext(){
-  const btn=document.getElementById('scr-next');
-  if(btn){btn.disabled=scrCorrect<scrTotal;}
-}
-
-// ── MULTIPLE CHOICE ──
-let mcCorrectCount=0,mcTotalCount=0;
-function initMC(){
-  mcCorrectCount=0;
-  mcTotalCount=document.querySelectorAll('.mc-block').length;
-  updateMCNext();
-}
-function handleMCAnswer(btn,isCorrect,block){
-  if(block.dataset.answered)return;
-  block.dataset.answered='1';
-  const allOpts=block.querySelectorAll('.mc-opt');
-  allOpts.forEach(b=>b.disabled=true);
-  btn.classList.add(isCorrect?'ok':'no');
-  if(!isCorrect){
-    allOpts.forEach(b=>{if(b.dataset.correct==='1')b.classList.add('ok');});
-  }
-  const fb=block.querySelector('.mc-fb');
-  fb.textContent=isCorrect?'✓ Correct! Great job!':'✗ Not quite — study the highlighted answer.';
-  fb.className='mc-fb '+(isCorrect?'ok':'no');
-  if(isCorrect)mcCorrectCount++;
-  updateMCNext();
-}
-function updateMCNext(){
-  const answered=document.querySelectorAll('.mc-block[data-answered]').length;
-  const btn=document.getElementById('mc-next');
-  if(btn){btn.disabled=answered<mcTotalCount;}
-}
-
-// ── OPEN RESPONSE ──
-function saveOpenResponse(){
-  const ta=document.getElementById('open-textarea');
-  const msg=document.getElementById('open-saved');
-  if(!ta||!ta.value.trim()){alert('Please write your response first!');return;}
-  const p=getPart();
-  if(p){
-    if(!p.answers)p.answers={};
-    p.answers['UNIT_OPEN']=ta.value.trim();
-    savePart(p);
-  }
-  if(msg){msg.style.display='block';}
-  const nb=document.getElementById('open-next');
-  if(nb){nb.disabled=false;}
-}
-
-// ── AI CHAT ──
-function initAI(){
-  const msgs=document.getElementById('ai-msgs');
-  if(!msgs||msgs.children.length)return;
-  addAIMsg('Hi there! 👋 I am your AI vocabulary helper! Ask me about any word from this unit and I will explain it in a simple way just for you!','bot');
-}
-function addAIMsg(text,type){
-  const msgs=document.getElementById('ai-msgs');
-  if(!msgs)return;
-  const d=document.createElement('div');
-  d.className='ai-msg '+type;d.textContent=text;
-  msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;
-}
-async function sendAI(unitName){
-  const inp=document.getElementById('ai-input');
-  const btn=document.getElementById('ai-send');
-  if(!inp||!btn)return;
-  const q=inp.value.trim();
-  if(!q)return;
-  addAIMsg(q,'usr');inp.value='';
-  btn.disabled=true;btn.textContent='Thinking…';
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system:'You are a warm, friendly vocabulary teacher for Grade 4 students (ages 9-11) in Nepal. Keep all responses to 2-3 short sentences maximum. Use very simple English. Be encouraging and fun. The student is studying the unit: "'+unitName+'". Never use words more complex than the student likely knows.',
-        messages:[{role:'user',content:q}]
-      })
-    });
-    const data=await res.json();
-    const reply=(data.content&&data.content[0])?data.content[0].text:'I am having trouble right now. Please try again in a moment!';
-    addAIMsg(reply,'bot');
-  }catch(e){
-    addAIMsg('Oops! I cannot connect right now. Please check your internet connection and try again.','bot');
-  }
-  btn.disabled=false;btn.textContent='Ask ↗';
-}
-
-// ── COMPLETION ──
-function confetti(){
-  const cols=['#1D9E75','#d4a017','#2db88a','#f5e6b0','#0a4a38','#ffffff','#e53e3e'];
-  for(let i=0;i<70;i++){
-    setTimeout(()=>{
-      const el=document.createElement('div');el.className='confetti-p';
-      el.style.cssText=`left:${Math.random()*100}vw;top:-12px;background:${cols[Math.floor(Math.random()*cols.length)]};width:${7+Math.random()*9}px;height:${7+Math.random()*9}px;animation-duration:${1.5+Math.random()*2.5}s;animation-delay:${Math.random()*0.6}s`;
-      document.body.appendChild(el);setTimeout(()=>el.remove(),5000);
-    },i*20);
-  }
-}
-
-function saveScores(unitNum,fibC,fibT,scrC,scrT,mcC,mcT){
-  const p=getPart();if(!p)return;
-  if(!p.scores)p.scores={};
-  if(!p.unitsCompleted)p.unitsCompleted=[];
-  p.scores['fib'+unitNum]=fibT?Math.round(fibC/fibT*100):0;
-  p.scores['scr'+unitNum]=scrT?Math.round(scrC/scrT*100):0;
-  p.scores['unit'+unitNum]=mcT?Math.round(mcC/mcT*100):0;
-  const overall=Math.round(((p.scores['fib'+unitNum]||0)+(p.scores['scr'+unitNum]||0)+(p.scores['unit'+unitNum]||0))/3);
-  p.scores['overall'+unitNum]=overall;
-  if(!p.unitsCompleted.includes(unitNum))p.unitsCompleted.push(unitNum);
-  savePart(p);
-}
-
-function showCompleteModal(unitNum,unitName,badgeIcon,nextPage){
-  const fibPct=fibTotal?Math.round(fibCorrect/fibTotal*100):0;
-  const scrPct=scrTotal?Math.round(scrCorrect/scrTotal*100):0;
-  const mcPct=mcTotalCount?Math.round(mcCorrectCount/mcTotalCount*100):0;
-  saveScores(unitNum,fibCorrect,fibTotal,scrCorrect,scrTotal,mcCorrectCount,mcTotalCount);
-  confetti();
-  const avg=Math.round((fibPct+scrPct+mcPct)/3);
-  const scoreClass=avg>=80?'great':avg>=60?'ok':'low';
-  const modal=document.getElementById('complete-modal');
-  document.getElementById('modal-scores').innerHTML=`
-    <div class="score-summary">
-      <div class="ss-title">📊 Your Unit ${unitNum} Results</div>
-      <div class="ss-row"><span class="ss-label">Fill in the Blanks</span><span class="ss-val ${fibPct>=80?'great':fibPct>=60?'ok':'low'}">${fibPct}%</span></div>
-      <div class="ss-row"><span class="ss-label">Word Scramble</span><span class="ss-val ${scrPct>=80?'great':scrPct>=60?'ok':'low'}">${scrPct}%</span></div>
-      <div class="ss-row"><span class="ss-label">Multiple Choice Quiz</span><span class="ss-val ${mcPct>=80?'great':mcPct>=60?'ok':'low'}">${mcPct}%</span></div>
-      <div class="ss-row"><span class="ss-label" style="font-weight:800">Overall Score</span><span class="ss-val ${scoreClass}" style="font-size:22px">${avg}%</span></div>
-    </div>
-  `;
-  if(nextPage){
-    document.getElementById('modal-next-btn').textContent='Next Unit →';
-    document.getElementById('modal-next-btn').onclick=()=>window.location=nextPage;
-    document.getElementById('modal-next-btn').style.display='block';
-  } else {
-    document.getElementById('modal-next-btn').textContent='🎓 Finish Course!';
-    document.getElementById('modal-next-btn').onclick=()=>window.location='index.html';
-    document.getElementById('modal-next-btn').style.display='block';
-  }
-  if(modal)modal.classList.add('show');
-}
-
-// ── INIT ──
-document.addEventListener('DOMContentLoaded',()=>{
-  const p=getPart();
-  if(!p){window.location='index.html';return;}
-  document.getElementById('student-name').textContent=p.name||'Student';
-  startTimer();renderTimer();renderProgress();
-  initSteps(7);
-  document.querySelectorAll('.fib-input').forEach(inp=>{
-    inp.addEventListener('keydown',e=>{if(e.key==='Enter'){const card=inp.closest('.fib-card');if(card)checkFIB(card);}});
-  });
-  document.querySelectorAll('.scr-inp').forEach(inp=>{
-    inp.addEventListener('keydown',e=>{if(e.key==='Enter'){const card=inp.closest('.scr-card');if(card)checkScramble(card);}});
-  });
-  const aiIn=document.getElementById('ai-input');
-  if(aiIn)aiIn.addEventListener('keydown',e=>{if(e.key==='Enter')sendAI(UNIT_NAME);});
-  initFIB();
+  const sl = document.getElementById('step-label');
+  if (sl) observer.observe(sl, {childList:true});
 });
-
 </script>
 </body>
 </html>

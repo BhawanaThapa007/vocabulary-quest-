@@ -4,80 +4,94 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Grade 4 Vocabulary Course</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Nunito',sans-serif;background:#f0f7f4;color:#1a1a1a;min-height:100vh;font-size:16px}
-.top-bar{background:#0a4a38;padding:12px 24px;display:flex;justify-content:space-between;align-items:center}
-.top-logo{font-family:'Lora',serif;font-size:18px;font-weight:700;color:#f5e6b0}
-.admin-link{color:rgba(255,255,255,.7);font-size:14px;text-decoration:none;padding:6px 14px;border:1px solid rgba(255,255,255,.3);border-radius:7px}
-.admin-link:hover{color:white;border-color:white}
-.cover-wrap{min-height:calc(100vh - 52px);display:flex;align-items:center;justify-content:center;padding:2rem;gap:52px;flex-wrap:wrap}
-.book-visual{flex-shrink:0;width:230px;height:310px;background:linear-gradient(160deg,#0d5c46,#1a7a5e,#0a4a38);border-radius:5px 16px 16px 5px;box-shadow:-8px 8px 0 #033024,0 16px 48px rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:28px 22px;border:1px solid rgba(212,160,23,.35);position:relative}
-.book-visual::before{content:'';position:absolute;left:0;top:0;bottom:0;width:14px;background:#033024;border-radius:5px 0 0 5px}
-.bv-icon{font-size:56px}
-.bv-line{width:60px;height:1.5px;background:#d4a017;opacity:.7}
+body{font-family:'Nunito',sans-serif;background:#f0f7f4;font-size:17px}
+.top{background:#0a4a38;padding:12px 22px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Lora',serif;font-size:17px;font-weight:700;color:#f5e6b0}
+.admin-btn{background:#d4a017;color:#3c2a00;border:none;border-radius:8px;padding:9px 18px;font-size:15px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;text-decoration:none;display:inline-block}
+.wrap{min-height:calc(100vh - 52px);display:flex;align-items:center;justify-content:center;padding:2rem;gap:48px;flex-wrap:wrap}
+.book-vis{flex-shrink:0;width:220px;height:300px;background:linear-gradient(160deg,#0d5c46,#1a7a5e,#0a4a38);border-radius:5px 16px 16px 5px;box-shadow:-8px 9px 0 #033024,0 16px 48px rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:26px 20px;border:1px solid rgba(212,160,23,.35);position:relative}
+.book-vis::before{content:'';position:absolute;left:0;top:0;bottom:0;width:14px;background:#033024;border-radius:5px 0 0 5px}
+.bv-icon{font-size:54px}
+.bv-line{width:56px;height:1.5px;background:#d4a017;opacity:.7}
 .bv-title{font-family:'Lora',serif;font-size:19px;font-weight:700;color:#f5e6b0;text-align:center;line-height:1.4}
-.bv-sub{font-size:12px;color:rgba(255,255,255,.65);text-align:center;line-height:2}
-.reg-side{max-width:460px;width:100%}
-.reg-card{background:white;border-radius:20px;padding:36px;box-shadow:0 8px 40px rgba(0,0,0,.1)}
-.reg-h1{font-family:'Lora',serif;font-size:27px;font-weight:700;color:#0a4a38;margin-bottom:5px}
-.reg-sub{font-size:15px;color:#777;margin-bottom:26px}
-.fg{margin-bottom:16px}
-.fl{display:block;font-size:15px;font-weight:700;color:#333;margin-bottom:6px}
-.fi{width:100%;border:2px solid #ddd;border-radius:10px;padding:13px 15px;font-size:17px;font-family:'Nunito',sans-serif;outline:none;transition:border-color .2s;background:#fafafa}
+.bv-sub{font-size:12px;color:rgba(255,255,255,.65);text-align:center;line-height:2.1}
+.card{background:white;border-radius:20px;padding:36px;max-width:480px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.1)}
+.h1{font-family:'Lora',serif;font-size:27px;font-weight:700;color:#0a4a38;margin-bottom:5px}
+.sub{font-size:15px;color:#777;margin-bottom:24px}
+.fg{margin-bottom:15px}
+.fl{display:block;font-size:16px;font-weight:700;color:#333;margin-bottom:6px}
+.fi{width:100%;border:2px solid #ddd;border-radius:10px;padding:13px 15px;font-size:17px;font-family:'Nunito',sans-serif;outline:none;background:#fafafa}
 .fi:focus{border-color:#1a7a5e;background:white}
 select.fi{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230a4a38' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-color:#fafafa}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.btn-start{width:100%;background:#0a4a38;color:white;border:none;border-radius:12px;padding:17px;font-size:19px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;margin-top:6px}
+.btn-start{width:100%;background:#0a4a38;color:white;border:none;border-radius:12px;padding:17px;font-size:20px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:6px;transition:all .2s}
 .btn-start:hover{background:#1a7a5e;transform:translateY(-2px);box-shadow:0 6px 20px rgba(10,74,56,.3)}
-.ret-link{text-align:center;margin-top:14px;font-size:14px;color:#888}
-.ret-link button{background:none;border:none;color:#1a7a5e;cursor:pointer;font-size:14px;font-weight:700;text-decoration:underline;font-family:'Nunito',sans-serif}
-.ret-panel{display:none;background:#e8f7f2;border:2px solid #2db88a;border-radius:12px;padding:18px;margin-top:14px}
+.admin-note{background:#fff8e1;border:1.5px solid #d4a017;border-radius:10px;padding:12px 16px;margin-top:14px;font-size:15px;color:#5c3d1e}
+.ret-link{text-align:center;margin-top:13px;font-size:15px;color:#888}
+.ret-link button{background:none;border:none;color:#1a7a5e;cursor:pointer;font-size:15px;font-weight:700;text-decoration:underline;font-family:'Nunito',sans-serif}
+.ret-panel{display:none;background:#e8f7f2;border:2px solid #2db88a;border-radius:12px;padding:16px;margin-top:13px}
 .ret-panel h3{font-size:16px;font-weight:700;color:#0a4a38;margin-bottom:10px}
-.su{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:white;border-radius:9px;margin-bottom:8px;cursor:pointer;border:1px solid rgba(0,0,0,.07)}
-.su:hover{background:#f0f7f4}
-.su-name{font-size:16px;font-weight:700}
-.su-info{font-size:13px;color:#777}
+.su{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:white;border-radius:9px;margin-bottom:8px;cursor:pointer;border:1px solid rgba(0,0,0,.08)}
+.su:hover{background:#f0f7f4;border-color:#2db88a}
+.su-name{font-size:16px;font-weight:700}.su-info{font-size:13px;color:#777}
 .su-prog{font-size:14px;color:#1a7a5e;font-weight:700}
-@media(max-width:700px){.book-visual{display:none}}
+.gamification-preview{background:linear-gradient(135deg,#e8f7f2,#fff8e1);border:2px solid rgba(45,184,138,.3);border-radius:12px;padding:14px 16px;margin-top:13px;font-size:14px;color:#0a4a38}
+.gamification-preview strong{display:block;font-size:15px;margin-bottom:6px}
+.badges-preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.bp{background:white;border-radius:8px;padding:6px 12px;font-size:13px;font-weight:700;border:1px solid rgba(0,0,0,.1)}
+@media(max-width:700px){.book-vis{display:none}.frow{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="top-bar">
-  <div class="top-logo">📚 Vocabulary Learning Adventure</div>
-  <a href="admin.html" class="admin-link">🔐 Admin Dashboard</a>
+<div class="top">
+  <div class="logo">📚 Grade 4 Vocabulary Learning Adventure</div>
+  <a href="admin.html" class="admin-btn">🔐 Admin Dashboard</a>
 </div>
-<div class="cover-wrap">
-  <div class="book-visual">
+<div class="wrap">
+  <div class="book-vis">
     <div class="bv-icon">📖</div>
     <div class="bv-line"></div>
     <div class="bv-title">Grade 4<br>Vocabulary<br>Course</div>
     <div class="bv-line"></div>
     <div class="bv-sub">🏛️ Academic Excellence<br>👨‍👩‍👧 Family &amp; Relations<br>🌿 Science &amp; Nature<br>🏘️ Community &amp; Culture</div>
   </div>
-  <div class="reg-side">
-    <div class="reg-card">
-      <div class="reg-h1">Welcome, Scholar! 👋</div>
-      <div class="reg-sub">Enter your details to begin learning.</div>
-      <div class="fg"><label class="fl">Your Full Name *</label><input class="fi" type="text" id="iname" placeholder="e.g. Ram Prasad Sharma"></div>
+  <div>
+    <div class="card">
+      <div class="h1">Welcome, Scholar! 👋</div>
+      <div class="sub">Fill in your details to begin the course.</div>
+      <div class="fg"><label class="fl">Full Name *</label><input class="fi" id="iname" placeholder="e.g. Ram Prasad Sharma" autocomplete="off"></div>
       <div class="frow">
         <div class="fg"><label class="fl">Age *</label><select class="fi" id="iage"><option value="">-- Age --</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13+</option></select></div>
         <div class="fg"><label class="fl">Gender</label><select class="fi" id="igender"><option value="">-- Select --</option><option>Male</option><option>Female</option><option>Prefer not to say</option></select></div>
       </div>
-      <div class="fg"><label class="fl">School Name *</label><input class="fi" type="text" id="ischool" placeholder="e.g. Shree Primary School"></div>
+      <div class="fg"><label class="fl">School Name *</label><input class="fi" id="ischool" placeholder="e.g. Shree Primary School, Kathmandu" autocomplete="off"></div>
       <div class="frow">
-        <div class="fg"><label class="fl">Grade / Class *</label><select class="fi" id="igrade"><option value="">-- Grade --</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option><option>Grade 6</option></select></div>
+        <div class="fg"><label class="fl">Grade *</label><select class="fi" id="igrade"><option value="">-- Grade --</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option><option>Grade 6</option></select></div>
         <div class="fg"><label class="fl">English Level</label><select class="fi" id="ilevel"><option value="">-- Level --</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></div>
       </div>
+      <div class="fg"><label class="fl">Research Code <span style="font-weight:400;color:#aaa">(if given by teacher)</span></label><input class="fi" id="icode" placeholder="e.g. S-001" autocomplete="off"></div>
       <button class="btn-start" onclick="startCourse()">📖 Open My Book &amp; Start!</button>
-      <div class="ret-link">Already started? <button onclick="toggleReturn()">Load my progress</button></div>
+      <div class="admin-note">🔐 <strong>Researcher / Teacher:</strong> <a href="admin.html" style="color:#0a4a38;font-weight:700">Open the Admin Dashboard</a> to view all scores and export data to Excel.</div>
+      <div class="gamification-preview">
+        <strong>🎮 Gamification in This Course:</strong>
+        Earn ⭐ XP points for every correct answer, level up as you progress, and collect a badge for each unit you complete. Finish all 4 units to earn your <strong>Course Certificate!</strong>
+        <div class="badges-preview">
+          <span class="bp">🏛️ Academic Scholar</span>
+          <span class="bp">👨‍👩‍👧 Family Scholar</span>
+          <span class="bp">🌿 Science Scholar</span>
+          <span class="bp">🏘️ Community Scholar</span>
+        </div>
+      </div>
+      <div class="ret-link">Already started? <button onclick="toggleReturn()">Load my saved progress →</button></div>
       <div class="ret-panel" id="ret-panel"><h3>📂 Saved on This Device</h3><div id="saved-list"></div></div>
     </div>
   </div>
 </div>
+<script src="shared.js"></script>
 <script>
-function getParts(){const a=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('vcp_')){try{a.push(JSON.parse(localStorage.getItem(k)||'{}'));}catch{}}}return a;}
 function startCourse(){
   const name=document.getElementById('iname').value.trim();
   const age=document.getElementById('iage').value;
@@ -88,22 +102,29 @@ function startCourse(){
   if(!school){alert('Please enter your school name!');return;}
   if(!grade){alert('Please select your grade!');return;}
   const pid='pid_'+Date.now();
-  const p={pid,name,age,gender:document.getElementById('igender').value,school,grade,level:document.getElementById('ilevel').value,startTime:new Date().toISOString(),lastActive:new Date().toISOString(),totalTime:0,unitsCompleted:[],scores:{},attempts:{},answers:{}};
+  const p={pid,name,age,gender:document.getElementById('igender').value,school,grade,level:document.getElementById('ilevel').value,code:document.getElementById('icode').value.trim(),startTime:new Date().toISOString(),lastActive:new Date().toISOString(),totalTime:0,xp:0,unitsCompleted:[],scores:{},attempts:{},answers:{},stepProgress:{}};
   localStorage.setItem('vcp_'+pid,JSON.stringify(p));
   localStorage.setItem('vc_current',pid);
   window.location='unit1.html';
 }
+function getParts(){const a=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('vcp_')){try{a.push(JSON.parse(localStorage.getItem(k)||'{}'));}catch{}}}return a;}
 function toggleReturn(){
   const panel=document.getElementById('ret-panel');
   if(panel.style.display==='block'){panel.style.display='none';return;}
   panel.style.display='block';
   const all=getParts();
-  if(!all.length){document.getElementById('saved-list').innerHTML='<div style="font-size:15px;color:#888">No saved participants found.</div>';return;}
-  document.getElementById('saved-list').innerHTML=all.map(p=>`<div class="su" onclick="loadP('${p.pid}')"><div><div class="su-name">${p.name||'Unknown'}</div><div class="su-info">${p.school||''} &bull; ${p.grade||''}</div></div><div class="su-prog">${(p.unitsCompleted||[]).length}/4 done</div></div>`).join('');
+  if(!all.length){document.getElementById('saved-list').innerHTML='<div style="padding:8px;color:#888">No saved participants found on this device.</div>';return;}
+  document.getElementById('saved-list').innerHTML=all.map(p=>`<div class="su" onclick="loadP('${p.pid}')"><div><div class="su-name">${p.name||'Unknown'} ${p.code?'('+p.code+')':''}</div><div class="su-info">${p.school||''} &bull; ${p.grade||''} &bull; ⭐${p.xp||0} XP</div></div><div class="su-prog">${(p.unitsCompleted||[]).length}/4 done ▶</div></div>`).join('');
 }
 function loadP(pid){
   localStorage.setItem('vc_current',pid);
-  try{const p=JSON.parse(localStorage.getItem('vcp_'+pid)||'{}');const done=(p.unitsCompleted||[]).length;window.location='unit'+(Math.min(done+1,4))+'.html';}catch{window.location='unit1.html';}
+  try{
+    const p=JSON.parse(localStorage.getItem('vcp_'+pid)||'{}');
+    const done=(p.unitsCompleted||[]).length;
+    // Go to next incomplete unit, or last unit if all done
+    const nextUnit=Math.min(done+1,4);
+    window.location='unit'+nextUnit+'.html';
+  }catch{window.location='unit1.html';}
 }
 </script>
 </body>
